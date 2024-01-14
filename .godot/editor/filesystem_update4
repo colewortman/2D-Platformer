@@ -1,12 +1,2 @@
-res://scenes/world.tscn
-res://scripts/HealthComponent.gd
 res://scenes/player.tscn
-res://scenes/enemy_guard.tscn
-res://scenes/souls.tscn
-res://scenes/enemy_mage.tscn
-res://scenes/lightning.tscn
-res://scenes/enemy_knight.tscn
-res://scenes/tendril.tscn
 res://scripts/player.gd
-res://scripts/Enemy_mage.gd
-res://scripts/lightning.gd
