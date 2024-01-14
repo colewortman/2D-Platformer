@@ -1,0 +1,200 @@
+[gd_scene load_steps=19 format=3 uid="uid://b3mc8012qls1s"]
+
+[ext_resource type="Script" path="res://scripts/tendril.gd" id="2_i6o8a"]
+[ext_resource type="Texture2D" uid="uid://e0n1yhcajiyv" path="res://assets/monster_tendril.png" id="2_wy2f3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h7wff"]
+atlas = ExtResource("2_wy2f3")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vd0uu"]
+atlas = ExtResource("2_wy2f3")
+region = Rect2(192, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_du0x5"]
+atlas = ExtResource("2_wy2f3")
+region = Rect2(0, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ma3rg"]
+atlas = ExtResource("2_wy2f3")
+region = Rect2(64, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yp6vf"]
+atlas = ExtResource("2_wy2f3")
+region = Rect2(128, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ru0ko"]
+atlas = ExtResource("2_wy2f3")
+region = Rect2(192, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qvvji"]
+atlas = ExtResource("2_wy2f3")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ymtld"]
+atlas = ExtResource("2_wy2f3")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h04es"]
+atlas = ExtResource("2_wy2f3")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4e14k"]
+atlas = ExtResource("2_wy2f3")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1r36e"]
+atlas = ExtResource("2_wy2f3")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yomda"]
+atlas = ExtResource("2_wy2f3")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0ww6e"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h7wff")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vd0uu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_du0x5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ma3rg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yp6vf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ru0ko")
+}],
+"loop": false,
+"name": &"attack_slam1",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qvvji")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ymtld")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h04es")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4e14k")
+}],
+"loop": false,
+"name": &"death",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1r36e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yomda")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4e14k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h04es")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ymtld")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qvvji")
+}],
+"loop": false,
+"name": &"spawn",
+"speed": 4.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_84j4l"]
+size = Vector2(36, 31.25)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3e04a"]
+radius = 51.2445
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bxvc4"]
+radius = 0.0
+height = 6.0
+
+[node name="tendril" type="CharacterBody2D"]
+script = ExtResource("2_i6o8a")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_0ww6e")
+animation = &"idle"
+metadata/_aseprite_wizard_config_ = {
+"layer": "",
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"op_exp": false,
+"source": "res://assets/monster_tendril.aseprite"
+}
+
+[node name="attack_control" type="Node2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="attack_control" groups=["player_projectile"]]
+light_mask = 4
+visibility_layer = 4
+position = Vector2(0, 4)
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="attack_control/Area2D"]
+position = Vector2(18, 0)
+shape = SubResource("RectangleShape2D_84j4l")
+disabled = true
+
+[node name="SpawnDelay_timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Spawn_timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Attack_timer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="Detection_area" type="Area2D" parent="."]
+light_mask = 0
+position = Vector2(0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detection_area"]
+visible = false
+shape = SubResource("CircleShape2D_3e04a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 20)
+rotation = -1.57079
+shape = SubResource("CapsuleShape2D_bxvc4")
+
+[node name="Duration" type="Timer" parent="."]
+wait_time = 6.0
+one_shot = true
+
+[connection signal="area_entered" from="attack_control/Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="timeout" from="SpawnDelay_timer" to="." method="_on_spawn_delay_timer_timeout"]
+[connection signal="timeout" from="Spawn_timer" to="." method="_on_spawn_timer_timeout"]
+[connection signal="timeout" from="Attack_timer" to="." method="_on_attack_timer_timeout"]
+[connection signal="body_entered" from="Detection_area" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="Detection_area" to="." method="_on_detection_area_body_exited"]
+[connection signal="timeout" from="Duration" to="." method="_on_duration_timeout"]

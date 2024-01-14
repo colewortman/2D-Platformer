@@ -1,0 +1,97 @@
+[gd_scene load_steps=11 format=3 uid="uid://cuvxvfrwsapxn"]
+
+[ext_resource type="Texture2D" uid="uid://ne8oe8xla2k1" path="res://assets/lightning.png" id="1_47uhe"]
+[ext_resource type="Script" path="res://scripts/lightning.gd" id="1_ckvwg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cyyjn"]
+atlas = ExtResource("1_47uhe")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_73jpp"]
+atlas = ExtResource("1_47uhe")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1kawr"]
+atlas = ExtResource("1_47uhe")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jbql5"]
+atlas = ExtResource("1_47uhe")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2mh5l"]
+atlas = ExtResource("1_47uhe")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2yu5f"]
+atlas = ExtResource("1_47uhe")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_v1rbg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cyyjn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_73jpp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1kawr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jbql5")
+}],
+"loop": false,
+"name": &"hit",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2mh5l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2yu5f")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 2.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tj0kf"]
+radius = 4.0
+height = 40.0
+
+[node name="lightning" type="Area2D"]
+top_level = true
+script = ExtResource("1_ckvwg")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_v1rbg")
+animation = &"hit"
+metadata/_aseprite_wizard_config_ = {
+"layer": "",
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"op_exp": false,
+"source": "res://assets/lightning.aseprite"
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(-1, -1)
+shape = SubResource("CapsuleShape2D_tj0kf")
+disabled = true
+
+[node name="Attack_cooldown" type="Timer" parent="."]
+one_shot = true
+
+[node name="Anim_cooldown" type="Timer" parent="."]
+wait_time = 0.5
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="timeout" from="Attack_cooldown" to="." method="_on_attack_cooldown_timeout"]
+[connection signal="timeout" from="Anim_cooldown" to="." method="_on_anim_cooldown_timeout"]

@@ -1,0 +1,94 @@
+[gd_scene load_steps=11 format=3 uid="uid://d0x7cy36o4yyu"]
+
+[ext_resource type="Script" path="res://scripts/arrow.gd" id="1_scwss"]
+[ext_resource type="Texture2D" uid="uid://cjgmyn1t124si" path="res://assets/arrow_attack.png" id="2_p3ooo"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f0lqc"]
+atlas = ExtResource("2_p3ooo")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bw6lf"]
+atlas = ExtResource("2_p3ooo")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rk014"]
+atlas = ExtResource("2_p3ooo")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hi386"]
+atlas = ExtResource("2_p3ooo")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nl7ld"]
+atlas = ExtResource("2_p3ooo")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rio5f"]
+atlas = ExtResource("2_p3ooo")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_d8m0e"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f0lqc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bw6lf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rk014")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hi386")
+}],
+"loop": false,
+"name": &"hit",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nl7ld")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rio5f")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 2.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wrybo"]
+radius = 5.0
+height = 26.0
+
+[node name="arrow" type="Area2D" groups=["player_projectile"]]
+top_level = true
+collision_layer = 5
+collision_mask = 5
+script = ExtResource("1_scwss")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_d8m0e")
+animation = &"hit"
+metadata/_aseprite_wizard_config_ = {
+"layer": "",
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"op_exp": false,
+"source": "res://assets/arrow_attack.aseprite"
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = -1.5708
+shape = SubResource("CapsuleShape2D_wrybo")
+
+[node name="Hit_timer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="timeout" from="Hit_timer" to="." method="_on_hit_timer_timeout"]

@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://bbi67o1tpwi3k"
+path="res://.godot/imported/enemy_knight.aseprite-814070d177d0df1cbbd36b769fafb1d9.res"
+
+[deps]
+
+source_file="res://assets/enemy_knight.aseprite"
+dest_files=["res://.godot/imported/enemy_knight.aseprite-814070d177d0df1cbbd36b769fafb1d9.res"]
+
+[params]
+

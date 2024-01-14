@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://dbmiyd843xf31"
+path="res://.godot/imported/rogue_player.aseprite-c2b79ddfd84b46f61bc9064b71ae1716.res"
+
+[deps]
+
+source_file="res://assets/rogue_player.aseprite"
+dest_files=["res://.godot/imported/rogue_player.aseprite-c2b79ddfd84b46f61bc9064b71ae1716.res"]
+
+[params]
+

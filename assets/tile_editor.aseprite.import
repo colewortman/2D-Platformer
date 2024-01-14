@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://c2tc2he23rdc8"
+path="res://.godot/imported/tile_editor.aseprite-af51811eb3cef5615db171a45c6c1efb.res"
+
+[deps]
+
+source_file="res://assets/tile_editor.aseprite"
+dest_files=["res://.godot/imported/tile_editor.aseprite-af51811eb3cef5615db171a45c6c1efb.res"]
+
+[params]
+
