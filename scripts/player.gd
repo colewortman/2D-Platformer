@@ -1,8 +1,9 @@
 extends CharacterBody2D
-#test 
+
 #physics constants
-const speed = 100.0
-const ACCELERATION = 800.0
+var speed = 100.0
+const dash_speed = 3000.0
+var acceleration = 800.0
 const FRICTION = 1000.0
 const JUMP_VELOCITY = -300.0
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -12,6 +13,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var transform_allow = true
 var just_transformed = false
 var attack_ip = false
+var dash_ip = false
 var main_attack_tracker = 0
 var alt_attack_tracker = 3
 var tendril_active = false
@@ -32,6 +34,7 @@ func _physics_process(delta):
 	handle_acceleration(input_axis, delta)
 	apply_friction(input_axis, delta)
 	update_movement_animations(input_axis)
+	handle_dash(input_axis, delta)
 	
 	if Input.is_action_just_pressed("transform") and attack_ip == false:
 		handle_transform()
@@ -146,7 +149,7 @@ func handle_attack(tracker):
 
 func handle_acceleration(input_axis, delta):
 	if input_axis != 0:
-		velocity.x = move_toward(velocity.x, speed * input_axis, ACCELERATION * delta)
+		velocity.x = move_toward(velocity.x, speed * input_axis, acceleration * delta)
 #end handle_acceleration()
 
 func apply_friction(input_axis, delta):
@@ -165,6 +168,17 @@ func update_movement_animations(input_axis):
 	if not is_on_floor() and transform_allow == true and attack_ip == false:
 		anim.play("jump")
 #end handle_update_animations()
+
+func handle_dash(input_axis, delta):
+	if Input.is_action_just_pressed("dash") and dash_ip == false:
+		dash_ip = true
+		$HitboxComponent/hitbox_collision.disabled = true
+		$Trail.visible = true
+		speed = dash_speed
+		acceleration = dash_speed
+		$iFrame_timer.start()
+		$Dash_timer.start()
+#end handle_dash()
 
 func _on_transformation_timer_timeout():
 	#allow animations to finish
@@ -190,41 +204,65 @@ func _on_weapon_area_area_entered(area):
 		attack.attack_damage = attack_damage
 		
 		area.damage(attack)
+#end _on_weapon_area_area_entered()
 
 func _on_grab_area_area_entered(area):
 	if area.is_in_group("loot"):
 		area.target = self
+#end _on_grab_area_area_entered()
 
 func _on_collect_area_area_entered(area):
 	if area.is_in_group("loot"):
 		souls += area.collect()
 		$HealthComponent.heal(area.get_health())
+#end  _on_collect_area_area_entered()
 
 func _on_health_component_death():
 	print("died")
+#end _on_health_component_death()
 
 func _on_hitbox_component_hit():
 	if anim == $rogue_anim:
 		$rogue_anim/rogue_color.visible = true
 	else:
 		$monster_anim/monster_color.visible = true
-	$hurt.play("hurt")
+	$effects.play("hurt")
 	$Hurt_timer.start()
+#end _on_hitbox_component_hit()
 
 func _on_hurt_timer_timeout():
 	$rogue_anim/rogue_color.visible = false
 	$monster_anim/monster_color.visible = false
+#end _on_hurt_timer_timeout()
 
 func spawn_tendril():
 	var new_tendril = tendril.instantiate()
 	new_tendril.global_position = $weapon/Weapon_area/Marker2D.global_position
 	summon_base.add_child(new_tendril)
+#end spawn_tendril()
 
 func spawn_arrow():
 	var new_arrow = arrow.instantiate()
 	new_arrow.global_position = $weapon/Weapon_area/Marker2D.global_position
 	summon_base.add_child(new_arrow)
-
+#end spawn_arrow()
 
 func _on_arrow_delay_timer_timeout():
 	spawn_arrow()
+#end _on_arrow_delay_timer_timeout()
+
+func _on_dash_timer_timeout():
+	speed = 100.0
+	acceleration = 800.0
+	velocity.x = 0
+	$Dash_cooldown.start()
+#end _on_dash_timer_timeout()
+
+func _on_dash_cooldown_timeout():
+	dash_ip = false
+#end _on_dash_cooldown_timeout()
+
+
+func _on_i_frame_timer_timeout():
+	$Trail.visible = false
+	$HitboxComponent/hitbox_collision.disabled = false

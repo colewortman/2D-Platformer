@@ -245,7 +245,6 @@ libraries = {
 wait_time = 0.3
 
 [node name="Attack_anim_timer" type="Timer" parent="."]
-wait_time = 0.5
 one_shot = true
 
 [node name="Attack_cooldown" type="Timer" parent="."]

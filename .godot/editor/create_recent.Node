@@ -1,3 +1,5 @@
+Line2D
+Timer
 CollisionShape2D
 CharacterBody2D
 AnimationPlayer
@@ -8,7 +10,6 @@ TileMap
 StaticBody2D
 ParallaxLayer
 ParallaxBackground
-Timer
 AnimatedSprite2D
 Area2D
 RigidBody2D
