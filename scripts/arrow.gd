@@ -6,6 +6,7 @@ var health = 1
 @onready var player = $/root/World/Player
 var attack_ip = false
 var attack_damage = 10.0
+var crit_chance = 50
 var direction_right
 
 func _ready():
@@ -38,6 +39,8 @@ func _on_area_entered(area):
 		health -= 1
 		$Hit_timer.start()
 		var attack = Attack.new()
-		attack.attack_damage = attack_damage
+		attack.attack_damage = randi_range(5, attack_damage)
+		attack.crit_chance = crit_chance
+		attack.player_attack = true
 		
 		area.damage(attack)

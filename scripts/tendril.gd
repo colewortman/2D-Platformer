@@ -10,6 +10,7 @@ var direction = Vector2()
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 var attack_damage = 5
+var crit_chance = 50
 
 var enemy_in_range = []
 
@@ -86,6 +87,8 @@ func _on_area_2d_area_entered(area):
 	if area.has_method("damage"):
 		var attack = Attack.new()
 		attack.attack_damage = attack_damage
+		attack.crit_chance = crit_chance
+		attack.player_attack = true
 		
 		area.damage(attack)
 

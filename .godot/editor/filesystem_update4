@@ -1,5 +1,5 @@
+res://scenes/floating_numbers.tscn
 res://scenes/world.tscn
-res://scripts/Trail.gd
 res://scenes/player.tscn
 res://scenes/enemy_guard.tscn
 res://scenes/souls.tscn
@@ -8,3 +8,9 @@ res://scenes/lightning.tscn
 res://scenes/enemy_knight.tscn
 res://scenes/tendril.tscn
 res://scenes/trail.tscn
+res://scripts/Popup_location.gd
+res://scripts/Attack.gd
+res://scripts/arrow.gd
+res://scripts/player.gd
+res://scripts/HealthComponent.gd
+res://scripts/tendril.gd

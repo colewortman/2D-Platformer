@@ -25,6 +25,7 @@ var tendril_active = false
 @onready var summon_base = $/root/World/summon
 var souls = 0
 var attack_damage
+var crit_chance
 
 func _physics_process(delta):
 	apply_gravity(delta)
@@ -100,17 +101,20 @@ func handle_attack(tracker):
 		match tracker:
 			0:
 				anim.play("attack_dagger1")
-				attack_damage = 30
+				attack_damage = randi_range(15, 30)
+				crit_chance = 25
 				tracker +=1
 				return tracker
 			1:
 				anim.play("attack_dagger2")
-				attack_damage = 30
+				attack_damage = randi_range(15, 30)
+				crit_chance = 25
 				tracker += 1
 				return tracker
 			2:
 				anim.play("attack_scythe1")
-				attack_damage = 45
+				attack_damage = randi_range(30, 40)
+				crit_chance = 100
 				tracker = 0
 				return tracker
 			3:
@@ -122,17 +126,20 @@ func handle_attack(tracker):
 		match tracker:
 			0:
 				anim.play("attack_slash1")
-				attack_damage = 20
+				attack_damage = randi_range(10, 20)
+				crit_chance = 40
 				tracker +=1
 				return tracker
 			1:
 				anim.play("attack_slash2")
-				attack_damage = 20
+				attack_damage = randi_range(10, 20)
+				crit_chance = 40
 				tracker += 1
 				return tracker
 			2:
 				anim.play("attack_axe1")
-				attack_damage = 50
+				attack_damage = randi_range(45, 60)
+				crit_chance = 80
 				tracker = 0
 				return tracker
 			3:
@@ -202,6 +209,8 @@ func _on_weapon_area_area_entered(area):
 	if area.has_method("damage"):
 		var attack = Attack.new()
 		attack.attack_damage = attack_damage
+		attack.crit_chance = crit_chance
+		attack.player_attack = true
 		
 		area.damage(attack)
 #end _on_weapon_area_area_entered()

@@ -1,9 +1,11 @@
-[gd_scene load_steps=26 format=3 uid="uid://bteed0gfmr55m"]
+[gd_scene load_steps=28 format=3 uid="uid://bteed0gfmr55m"]
 
 [ext_resource type="Script" path="res://scripts/Enemy_mage.gd" id="1_wr1q6"]
 [ext_resource type="Texture2D" uid="uid://cetj3i6mwwyqe" path="res://assets/enemy_mage1.png" id="2_np1on"]
 [ext_resource type="PackedScene" uid="uid://cw0dyuimranom" path="res://scenes/health_component.tscn" id="3_ptgs7"]
 [ext_resource type="PackedScene" uid="uid://b05t7qod7tx3" path="res://scenes/hitbox_component.tscn" id="4_pyi7i"]
+[ext_resource type="PackedScene" uid="uid://x82pl1gdhc0g" path="res://scenes/popup_component.tscn" id="5_8h6xt"]
+[ext_resource type="PackedScene" uid="uid://jy4d2cdbie5j" path="res://scenes/floating_numbers.tscn" id="6_7ln83"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vsa24"]
 atlas = ExtResource("2_np1on")
@@ -206,15 +208,19 @@ shape = SubResource("CircleShape2D_kuxed")
 [node name="HealthComponent" parent="." instance=ExtResource("3_ptgs7")]
 MAX_HEALTH = 10
 
-[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_pyi7i")]
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component", "popup_location") instance=ExtResource("4_pyi7i")]
 collision_layer = 4
 collision_mask = 4
 health_component = NodePath("../HealthComponent")
+popup_location = NodePath("../PopupComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 visible = false
 position = Vector2(-1, 4)
 shape = SubResource("CircleShape2D_wftwe")
+
+[node name="PopupComponent" parent="." instance=ExtResource("5_8h6xt")]
+damage_numbers = ExtResource("6_7ln83")
 
 [node name="Detection_area" type="Area2D" parent="."]
 

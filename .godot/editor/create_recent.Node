@@ -1,8 +1,10 @@
+Marker2D
+Label
+AnimationPlayer
 Line2D
 Timer
 CollisionShape2D
 CharacterBody2D
-AnimationPlayer
 Sprite2D
 AnimatableBody2D
 Camera2D
@@ -13,7 +15,6 @@ ParallaxBackground
 AnimatedSprite2D
 Area2D
 RigidBody2D
-Marker2D
 Node2D
 ColorRect
 AudioStreamPlayer
