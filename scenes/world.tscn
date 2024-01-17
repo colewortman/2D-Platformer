@@ -287,23 +287,18 @@ hp = 80
 position = Vector2(-63, 139)
 
 [node name="Enemy_guard" parent="." instance=ExtResource("3_h4lb3")]
-top_level = true
 position = Vector2(200, 144)
 
 [node name="Enemy_guard2" parent="." instance=ExtResource("3_h4lb3")]
-top_level = true
 position = Vector2(279, 15)
 
 [node name="Enemy_mage" parent="." instance=ExtResource("4_kv5i3")]
-top_level = true
 position = Vector2(272, 96)
 
 [node name="Enemy_mage2" parent="." instance=ExtResource("4_kv5i3")]
-top_level = true
 position = Vector2(472, 64)
 
 [node name="Enemy_mage3" parent="." instance=ExtResource("4_kv5i3")]
-top_level = true
 position = Vector2(33, -18)
 
 [node name="enemy_knight" parent="." instance=ExtResource("4_e3rk2")]

@@ -32,6 +32,11 @@ func _physics_process(delta):
 	apply_gravity(delta)
 	handle_jump()
 	
+	if souls <= 0:
+			souls = 0
+	elif souls >= 100:
+		souls = 100
+	
 	var input_axis = Input.get_axis("left", "right")
 	handle_acceleration(input_axis, delta)
 	apply_friction(input_axis, delta)
@@ -57,8 +62,6 @@ func _physics_process(delta):
 			$weapon.rotation_degrees = 0
 		
 		souls -= 30
-		if souls <= 0:
-			souls = 0
 		var new_void_bomb = void_bomb.instantiate()
 		new_void_bomb.global_position = $weapon/Weapon_area/Marker2D.global_position
 		summon_base.add_child(new_void_bomb)
@@ -115,20 +118,20 @@ func handle_attack(tracker):
 		match tracker:
 			0:
 				anim.play("attack_dagger1")
-				attack_damage = randi_range(15, 30)
+				attack_damage = randi_range(10, 20)
 				crit_chance = 25
 				tracker +=1
 				return tracker
 			1:
 				anim.play("attack_dagger2")
-				attack_damage = randi_range(15, 30)
+				attack_damage = randi_range(10, 20)
 				crit_chance = 25
 				tracker += 1
 				return tracker
 			2:
 				anim.play("attack_scythe1")
-				attack_damage = randi_range(30, 40)
-				crit_chance = 100
+				attack_damage = randi_range(20, 40)
+				crit_chance = 95
 				tracker = 0
 				return tracker
 			3:
@@ -140,13 +143,13 @@ func handle_attack(tracker):
 		match tracker:
 			0:
 				anim.play("attack_slash1")
-				attack_damage = randi_range(10, 20)
+				attack_damage = randi_range(20, 30)
 				crit_chance = 40
 				tracker +=1
 				return tracker
 			1:
 				anim.play("attack_slash2")
-				attack_damage = randi_range(10, 20)
+				attack_damage = randi_range(20, 30)
 				crit_chance = 40
 				tracker += 1
 				return tracker
@@ -193,8 +196,9 @@ func update_movement_animations(input_axis):
 func handle_dash(input_axis, delta):
 	if Input.is_action_just_pressed("dash") and dash_ip == false:
 		dash_ip = true
-		$".".set_collision_layer_value(2, false)
-		$".".set_collision_mask_value(2, false)
+		if anim == $rogue_anim:
+			$".".set_collision_layer_value(2, false)
+			$".".set_collision_mask_value(2, false)
 		$HitboxComponent/hitbox_collision.disabled = true
 		$Trail.visible = true
 		speed = dash_speed

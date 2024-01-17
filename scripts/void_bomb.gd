@@ -24,7 +24,7 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
 	else:
-		speed = 25.0
+		speed = 20.0
 		
 	if direction_right == true:
 		global_position.x += speed * delta
