@@ -19,6 +19,7 @@ var alt_attack_tracker = 3
 var tendril_active = false
 @onready var tendril = preload("res://scenes/tendril.tscn")
 @onready var arrow = preload("res://scenes/arrow.tscn")
+@onready var void_bomb = preload("res://scenes/void_bomb.tscn")
 
 
 #player stats variables
@@ -42,12 +43,25 @@ func _physics_process(delta):
 	
 	if Input.is_action_just_pressed("attack_main") and attack_ip == false:
 		main_attack_tracker = handle_attack(main_attack_tracker) 
-		
+	
 	if Input.is_action_just_pressed("attack_alternate") and attack_ip == false:
 		alt_attack_tracker = handle_attack(alt_attack_tracker)
 	
 	if Input.is_action_just_pressed("down") and is_on_floor() == true:
 		position.y += 1
+	
+	if Input.is_action_just_pressed("ultimate") and souls >= 30:
+		if anim.flip_h:
+			$weapon.rotation_degrees = 180
+		else:
+			$weapon.rotation_degrees = 0
+		
+		souls -= 30
+		if souls <= 0:
+			souls = 0
+		var new_void_bomb = void_bomb.instantiate()
+		new_void_bomb.global_position = $weapon/Weapon_area/Marker2D.global_position
+		summon_base.add_child(new_void_bomb)
 	
 	move_and_slide()
 #end _physics_process()
@@ -179,6 +193,8 @@ func update_movement_animations(input_axis):
 func handle_dash(input_axis, delta):
 	if Input.is_action_just_pressed("dash") and dash_ip == false:
 		dash_ip = true
+		$".".set_collision_layer_value(2, false)
+		$".".set_collision_mask_value(2, false)
 		$HitboxComponent/hitbox_collision.disabled = true
 		$Trail.visible = true
 		speed = dash_speed
@@ -221,7 +237,7 @@ func _on_grab_area_area_entered(area):
 #end _on_grab_area_area_entered()
 
 func _on_collect_area_area_entered(area):
-	if area.is_in_group("loot"):
+	if area.is_in_group("loot") and area.collected == false:
 		souls += area.collect()
 		$HealthComponent.heal(area.get_health())
 #end  _on_collect_area_area_entered()
@@ -261,6 +277,8 @@ func _on_arrow_delay_timer_timeout():
 #end _on_arrow_delay_timer_timeout()
 
 func _on_dash_timer_timeout():
+	$".".set_collision_layer_value(2, true)
+	$".".set_collision_mask_value(2, true)
 	speed = 100.0
 	acceleration = 800.0
 	velocity.x = 0
@@ -269,6 +287,7 @@ func _on_dash_timer_timeout():
 
 func _on_dash_cooldown_timeout():
 	dash_ip = false
+	
 #end _on_dash_cooldown_timeout()
 
 

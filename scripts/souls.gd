@@ -4,6 +4,7 @@ extends Area2D
 @export var hp := 15
 var speed = -1
 var target = null
+var collected = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -15,9 +16,12 @@ func _physics_process(delta):
 		speed += 5*delta
 
 func collect():
-	$AudioStreamPlayer.play()
-	$AnimatedSprite2D.visible = false
-	return experience
+	if not collected:
+		collected = true
+		$AudioStreamPlayer.play()
+		$AnimatedSprite2D.visible = false
+		print(experience)
+		return experience
 
 func get_health():
 	return hp

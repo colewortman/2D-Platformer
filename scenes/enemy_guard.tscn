@@ -181,10 +181,14 @@ _data = {
 size = Vector2(58, 20)
 
 [node name="Enemy_guard" type="CharacterBody2D" groups=["enemy"]]
+top_level = true
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_2c2qo")
 attack_damage = 10.0
 knockback_force = 10.0
 stun_damage = 50.0
+experience = 10
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 clip_children = 2

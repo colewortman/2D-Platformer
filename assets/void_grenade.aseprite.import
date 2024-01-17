@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://dd7sr5e3icrbp"
+path="res://.godot/imported/void_grenade.aseprite-f9627f6fdda001fd55a29a66a61815bf.res"
+
+[deps]
+
+source_file="res://assets/void_grenade.aseprite"
+dest_files=["res://.godot/imported/void_grenade.aseprite-f9627f6fdda001fd55a29a66a61815bf.res"]
+
+[params]
+

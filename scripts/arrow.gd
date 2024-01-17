@@ -32,7 +32,7 @@ func _on_hit_timer_timeout():
 		queue_free()
 
 func _on_area_entered(area):
-	if area.has_method("damage"):
+	if area.has_method("damage") and area.get_parent().is_in_group("enemy"):
 		attack_ip = true
 		speed = 10
 		anim.play("hit")
