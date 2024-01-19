@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://c7ifvkqe4enm0"]
+
+[node name="Death_void" type="Node2D"]
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(0, -1, -106, -1, -106, 180, 0, 180, 0, 250, 538, 250, 538, -1, 559, -1, 667, -1, 667, 247, 667, 342, -330, 343, -330, -1, -330, -65, 667, -65, 667, -1, 417, -1)

@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://cf6j740mwgwms"
+path="res://.godot/imported/flame_wall.aseprite-138b87202a2249991a1c794a8b4539de.res"
+
+[deps]
+
+source_file="res://assets/flame_wall.aseprite"
+dest_files=["res://.godot/imported/flame_wall.aseprite-138b87202a2249991a1c794a8b4539de.res"]
+
+[params]
+

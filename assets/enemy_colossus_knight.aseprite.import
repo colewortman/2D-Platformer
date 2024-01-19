@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://vthlboy5il0o"
+path="res://.godot/imported/enemy_colossus_knight.aseprite-72ce96b2cafb27360d7cc0c0ea078e21.res"
+
+[deps]
+
+source_file="res://assets/enemy_colossus_knight.aseprite"
+dest_files=["res://.godot/imported/enemy_colossus_knight.aseprite-72ce96b2cafb27360d7cc0c0ea078e21.res"]
+
+[params]
+
