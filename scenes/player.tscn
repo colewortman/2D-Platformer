@@ -1022,7 +1022,6 @@ visible = false
 health_component = NodePath("../HealthComponent")
 
 [node name="hitbox_collision" type="CollisionShape2D" parent="HitboxComponent"]
-visible = false
 position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_70xg5")
 

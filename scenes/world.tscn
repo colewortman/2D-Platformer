@@ -1,11 +1,10 @@
-[gd_scene load_steps=25 format=3 uid="uid://d3v5au0s6q17d"]
+[gd_scene load_steps=24 format=3 uid="uid://d3v5au0s6q17d"]
 
 [ext_resource type="PackedScene" uid="uid://blob7hpwc781b" path="res://scenes/souls.tscn" id="1_ih24m"]
 [ext_resource type="PackedScene" uid="uid://bfwn2y7kbir1d" path="res://scenes/player.tscn" id="2_p2n6d"]
 [ext_resource type="PackedScene" uid="uid://ddt6rtpck1koy" path="res://scenes/enemy_guard.tscn" id="3_h4lb3"]
 [ext_resource type="PackedScene" uid="uid://bteed0gfmr55m" path="res://scenes/enemy_mage.tscn" id="4_kv5i3"]
 [ext_resource type="Texture2D" uid="uid://bb137qjxen400" path="res://assets/sky_background1.png" id="5_77hh7"]
-[ext_resource type="PackedScene" uid="uid://cctkoql7wvni0" path="res://scenes/colossus_knight.tscn" id="5_ftwyd"]
 [ext_resource type="Texture2D" uid="uid://b3nt845bfydi3" path="res://assets/mountainbehind_background1.png" id="6_otax5"]
 [ext_resource type="Texture2D" uid="uid://crek26la2h3if" path="res://assets/mountainfront_background1.png" id="7_5n44f"]
 [ext_resource type="Texture2D" uid="uid://cg40lt0bdaq6m" path="res://assets/level1_tiles.png" id="7_tifdc"]
@@ -283,8 +282,9 @@ position = Vector2(-6, 137)
 experience = 30
 hp = 80
 
-[node name="Player" parent="." instance=ExtResource("2_p2n6d")]
+[node name="Player" parent="." node_paths=PackedStringArray("summon_base") instance=ExtResource("2_p2n6d")]
 position = Vector2(-63, 139)
+summon_base = NodePath("../summon")
 
 [node name="Enemy_guard" parent="." instance=ExtResource("3_h4lb3")]
 position = Vector2(200, 144)
@@ -300,9 +300,6 @@ position = Vector2(472, 64)
 
 [node name="Enemy_mage3" parent="." instance=ExtResource("4_kv5i3")]
 position = Vector2(33, -18)
-
-[node name="colossus_knight" parent="." instance=ExtResource("5_ftwyd")]
-position = Vector2(-10, -397)
 
 [node name="loot" type="Node2D" parent="."]
 

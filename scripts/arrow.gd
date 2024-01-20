@@ -9,12 +9,6 @@ var attack_damage = 10.0
 var crit_chance = 50
 var direction_right
 
-func _ready():
-	if player.anim.flip_h == true:
-		direction_right = false
-	else:
-		direction_right = true
-
 func _process(delta):
 	if !attack_ip:
 		speed = 200.0

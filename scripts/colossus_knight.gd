@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 @onready var player = $/root/Death_void/Player
 @onready var anim = $AnimatedSprite2D
-#@onready var loot_base = $/root/World/loot
+@export var loot_base : Node2D
 
 @export var attack_damage: float
 @export var knockback_force: float
@@ -45,6 +45,7 @@ func _process(delta):
 			state = states.SLAM
 			$Shield/shield_hitbox.disabled = false
 			$slam_timer.start()
+			$slam_collision_timer.start()
 		
 		if state == states.BASH and $bash_timer.is_stopped():
 			$bash_timer.start()
@@ -64,19 +65,19 @@ func handle_states():
 			speed = 0.0
 			anim.play("idle")
 		states.CHARGE:
+			attack_damage = 10.0
 			speed = 80.0
 			anim.play("charge1")
 			if player_far == false:
 				state = states.BASH
 		states.BASH:
+			attack_damage = 50.0
 			speed = 25.0
 			anim.play("bash1")
 		states.SLAM:
+			attack_damage = 100.0
 			speed = 0.0
-			if anim.flip_h == true:
-				$Shield/shield_hitbox.rotation_degrees = 180
-			else:
-				$Shield/shield_hitbox.rotation_degrees = 0
+			
 			anim.play("slam1")
 			$shield_collision.set_collision_layer_value(1, false)
 			$shield_collision.set_collision_mask_value(1, false)
@@ -85,13 +86,28 @@ func handle_flipping():
 	
 	direction = (player.global_position - global_position).normalized()
 	
-	if direction.x < 0 and !state == states.CHARGE:
+	if direction.x < 0 and attack_ip == false:
 		flip = false
 		$flip_timer.start()
-	elif direction.x > 0 and !state == states.CHARGE:
+	elif direction.x > 0 and attack_ip == false:
 		flip = true
 		$flip_timer.start()
-	
+		
+	if anim.flip_h == true:
+		$shield_collision.rotation_degrees = 180
+		$body_rigid.rotation_degrees = 180
+		$Detection_area.rotation_degrees = 180
+		$Shield.rotation_degrees = 180
+		$HitboxComponent.rotation_degrees = 180
+		$HitboxComponent2.rotation_degrees = 180
+	else:
+		$shield_collision.rotation_degrees = 0
+		$body_rigid.rotation_degrees = 0
+		$Detection_area.rotation_degrees = 0
+		$Shield.rotation_degrees = 0
+		$HitboxComponent.rotation_degrees = 0
+		$HitboxComponent2.rotation_degrees = 0
+
 func _on_detection_area_body_entered(body):
 	if body.is_in_group("player"):
 		player_far = false
@@ -99,7 +115,6 @@ func _on_detection_area_body_entered(body):
 func _on_detection_area_body_exited(body):
 	if body.is_in_group("player"):
 		player_far = true
-	
 	
 func _on_health_component_death():
 	print("signal recieved")
@@ -113,7 +128,7 @@ func _on_death_timer_timeout():
 	new_soul.global_position = global_position
 	new_soul.experience = experience
 	new_soul.hp = soul_hp
-	#loot_base.add_child(new_soul)
+	loot_base.add_child(new_soul)
 	queue_free()
 
 func _on_hitbox_component_hit():
@@ -121,7 +136,8 @@ func _on_hitbox_component_hit():
 		$AnimatedSprite2D/ColorRect.visible = true
 		$hurt.play("hurt")
 		$Hurt_timer.start()
-
+		$HealthComponent.crit_zone = true
+		
 func _on_shield_area_entered(area):
 	if area.has_method("damage"):
 		var attack = Attack.new()
@@ -148,11 +164,23 @@ func _on_bash_timer_timeout():
 	$attack_cooldown.start()
 
 func _on_slam_timer_timeout():
-	state = states.IDLE
-	$shield_collision.set_collision_layer_value(1, true)
-	$shield_collision.set_collision_mask_value(1, true)
+	anim.play("idle")
 	$Shield/shield_hitbox.disabled = true
 	$attack_cooldown.start()
+	state = states.IDLE
+
+func _on_slam_collision_timer_timeout():
+	$shield_collision.set_collision_layer_value(1, true)
+	$shield_collision.set_collision_mask_value(1, true)
 
 func _on_attack_cooldown_timeout():
 	attack_ip = false
+
+func _on_hitbox_component_2_hit():
+	if !state == states.DEATH:
+		$AnimatedSprite2D/ColorRect.visible = true
+		$hurt.play("hurt")
+		$Hurt_timer.start()
+		$HealthComponent.crit_zone = false
+
+

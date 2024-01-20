@@ -3,6 +3,7 @@ class_name HealthComponent
 
 @export var MAX_HEALTH := 100
 var health : float
+var crit_zone = false
 
 signal death
 
@@ -13,6 +14,9 @@ func _ready():
 
 func damage(attack: Attack):
 	if attack.player_attack:
+		if crit_zone:
+			attack.crit_chance = 100
+		
 		attack.crit_roll = randi_range(1, 100)
 		
 		if attack.crit_roll <= attack.crit_chance:

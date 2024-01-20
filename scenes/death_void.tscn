@@ -1,25 +1,36 @@
-[gd_scene load_steps=4 format=3 uid="uid://c7ifvkqe4enm0"]
+[gd_scene load_steps=5 format=3 uid="uid://c7ifvkqe4enm0"]
 
 [ext_resource type="Script" path="res://scripts/death_void.gd" id="1_dlnos"]
 [ext_resource type="PackedScene" uid="uid://cctkoql7wvni0" path="res://scenes/colossus_knight.tscn" id="2_e3d0d"]
 [ext_resource type="PackedScene" uid="uid://bfwn2y7kbir1d" path="res://scenes/player.tscn" id="3_csla4"]
 
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_21epd"]
+b = Vector2(871, -1)
+
 [node name="Death_void" type="Node2D"]
 script = ExtResource("1_dlnos")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(3, -80)
+position = Vector2(2, -86)
 collision_layer = 11
 collision_mask = 11
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
-polygon = PackedVector2Array(-106, 181, -1, 181, -1, 252, 541, 252, 542, -57, 599, -57, 603, 326, -166, 327, -166, -56, -106, -56)
+polygon = PackedVector2Array(-106, 176, -77, 176, -77, 252, 287, 253, 287, 290, 309, 290, 309, 253, 541, 252, 542, -57, 599, -57, 603, 326, -166, 327, -166, -56, -106, -56)
 
 [node name="Polygon2D" type="Polygon2D" parent="StaticBody2D/CollisionPolygon2D"]
 color = Color(0, 0, 0, 1)
 
-[node name="colossus_knight" parent="." instance=ExtResource("2_e3d0d")]
-position = Vector2(401, 104)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-191, -58)
+shape = SubResource("SegmentShape2D_21epd")
 
-[node name="Player" parent="." instance=ExtResource("3_csla4")]
-position = Vector2(-54, 82)
+[node name="colossus_knight" parent="." node_paths=PackedStringArray("loot_base") instance=ExtResource("2_e3d0d")]
+position = Vector2(400, 101)
+loot_base = NodePath("../object_node")
+
+[node name="Player" parent="." node_paths=PackedStringArray("summon_base") instance=ExtResource("3_csla4")]
+position = Vector2(-92, 70)
+summon_base = NodePath("../object_node")
+
+[node name="object_node" type="Node2D" parent="." groups=["objects"]]

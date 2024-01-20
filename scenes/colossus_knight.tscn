@@ -110,6 +110,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ewi6r"]
 size = Vector2(36, 62)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7co38"]
+size = Vector2(14, 61)
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_iwypv"]
 radius = 18.0
 height = 50.0
@@ -118,7 +121,7 @@ height = 50.0
 size = Vector2(76, 134.5)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h6smu"]
-radius = 72.0
+radius = 76.0066
 
 [sub_resource type="Animation" id="Animation_jqdbf"]
 length = 0.001
@@ -158,23 +161,21 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pnxp3"]
-size = Vector2(52, 23)
+size = Vector2(53, 40.75)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_opl7a"]
-size = Vector2(51, 96)
+size = Vector2(86.25, 73.25)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4wnuq"]
-size = Vector2(42, 58)
-
-[node name="colossus_knight" type="CharacterBody2D"]
+[node name="colossus_knight" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 8
 collision_mask = 8
 script = ExtResource("1_h00j2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+clip_children = 2
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_lr2tl")
-animation = &"slam1"
+animation = &"idle"
 metadata/_aseprite_wizard_config_ = {
 "layer": "",
 "o_ex_p": "",
@@ -194,31 +195,51 @@ offset_bottom = 82.0
 color = Color(1, 0, 0, 0.501961)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(6, 33)
 shape = SubResource("RectangleShape2D_ewi6r")
 
 [node name="PopupComponent" parent="." instance=ExtResource("5_x7jom")]
 visible = false
-position = Vector2(-15, -69)
+position = Vector2(0, -80)
+damage_numbers = ExtResource("6_dhwd4")
+
+[node name="PopupComponent2" parent="." instance=ExtResource("5_x7jom")]
+visible = false
+position = Vector2(0, 29)
 damage_numbers = ExtResource("6_dhwd4")
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_6xkw0")]
 visible = false
 MAX_HEALTH = 2000
 
+[node name="HitboxComponent2" parent="." node_paths=PackedStringArray("health_component", "popup_location") instance=ExtResource("4_0xlcu")]
+visible = false
+position = Vector2(0, 34)
+collision_layer = 4
+collision_mask = 4
+health_component = NodePath("../HealthComponent")
+popup_location = NodePath("../PopupComponent2")
+
+[node name="leg" type="CollisionShape2D" parent="HitboxComponent2"]
+position = Vector2(2, 0)
+shape = SubResource("RectangleShape2D_7co38")
+debug_color = Color(1, 0, 0, 0.419608)
+
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component", "popup_location") instance=ExtResource("4_0xlcu")]
+visible = false
+position = Vector2(1, -79)
 collision_layer = 4
 collision_mask = 4
 health_component = NodePath("../HealthComponent")
 popup_location = NodePath("../PopupComponent")
 
-[node name="hitbox" type="CollisionShape2D" parent="HitboxComponent"]
-position = Vector2(-8, -81)
+[node name="head" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(-10, 0)
 shape = SubResource("CapsuleShape2D_iwypv")
 debug_color = Color(1, 0, 0, 0.419608)
 
 [node name="Shield" type="Area2D" parent="."]
-visible = false
 
 [node name="shield_hitbox" type="CollisionShape2D" parent="Shield"]
 position = Vector2(-47, -4.75)
@@ -228,14 +249,14 @@ debug_color = Color(1, 0.87451, 0, 0.45098)
 
 [node name="Detection_area" type="Area2D" parent="."]
 visible = false
-position = Vector2(108, -39)
+position = Vector2(0, 7)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Detection_area"]
-position = Vector2(-134, 45)
+position = Vector2(-24, 0)
 shape = SubResource("CircleShape2D_h6smu")
 
 [node name="flip_timer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 0.25
 one_shot = true
 
 [node name="charge_timer" type="Timer" parent="."]
@@ -249,8 +270,12 @@ one_shot = true
 wait_time = 0.9
 one_shot = true
 
+[node name="slam_collision_timer" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+
 [node name="attack_cooldown" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 2.5
 one_shot = true
 
 [node name="hurt" type="AnimationPlayer" parent="."]
@@ -266,24 +291,25 @@ one_shot = true
 one_shot = true
 
 [node name="shield_collision" type="CharacterBody2D" parent="."]
+position = Vector2(1, 39)
 collision_layer = 3
 collision_mask = 3
+metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="shield_collision"]
-position = Vector2(-40, 51.5)
+position = Vector2(-40, 0)
 shape = SubResource("RectangleShape2D_pnxp3")
 
 [node name="body_rigid" type="CharacterBody2D" parent="."]
+position = Vector2(0, -19)
+metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="body_rigid"]
-position = Vector2(-40.5, -9)
+position = Vector2(-22, 0)
 shape = SubResource("RectangleShape2D_opl7a")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="body_rigid"]
-position = Vector2(7, -28)
-shape = SubResource("RectangleShape2D_4wnuq")
-
 [connection signal="death" from="HealthComponent" to="." method="_on_health_component_death"]
+[connection signal="hit" from="HitboxComponent2" to="." method="_on_hitbox_component_2_hit"]
 [connection signal="hit" from="HitboxComponent" to="." method="_on_hitbox_component_hit"]
 [connection signal="area_entered" from="Shield" to="." method="_on_shield_area_entered"]
 [connection signal="body_entered" from="Detection_area" to="." method="_on_detection_area_body_entered"]
@@ -291,6 +317,7 @@ shape = SubResource("RectangleShape2D_4wnuq")
 [connection signal="timeout" from="flip_timer" to="." method="_on_flip_timer_timeout"]
 [connection signal="timeout" from="bash_timer" to="." method="_on_bash_timer_timeout"]
 [connection signal="timeout" from="slam_timer" to="." method="_on_slam_timer_timeout"]
+[connection signal="timeout" from="slam_collision_timer" to="." method="_on_slam_collision_timer_timeout"]
 [connection signal="timeout" from="attack_cooldown" to="." method="_on_attack_cooldown_timeout"]
 [connection signal="timeout" from="Hurt_timer" to="." method="_on_hurt_timer_timeout"]
 [connection signal="timeout" from="Death_timer" to="." method="_on_death_timer_timeout"]

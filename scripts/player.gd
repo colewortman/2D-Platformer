@@ -23,7 +23,7 @@ var tendril_active = false
 
 
 #player stats variables
-@onready var summon_base = $/root/World/summon
+@export var summon_base : Node2D
 var souls = 0
 var attack_damage
 var crit_chance
@@ -266,12 +266,14 @@ func _on_hurt_timer_timeout():
 
 func spawn_tendril():
 	var new_tendril = tendril.instantiate()
+	new_tendril.player = $"."
 	new_tendril.global_position = $weapon/Weapon_area/Marker2D.global_position
 	summon_base.add_child(new_tendril)
 #end spawn_tendril()
 
 func spawn_arrow():
 	var new_arrow = arrow.instantiate()
+	new_arrow.direction_right = !anim.flip_h
 	new_arrow.global_position = $weapon/Weapon_area/Marker2D.global_position
 	summon_base.add_child(new_arrow)
 #end spawn_arrow()
