@@ -1,7 +1,25 @@
-[gd_scene format=3 uid="uid://c7ifvkqe4enm0"]
+[gd_scene load_steps=4 format=3 uid="uid://c7ifvkqe4enm0"]
+
+[ext_resource type="Script" path="res://scripts/death_void.gd" id="1_dlnos"]
+[ext_resource type="PackedScene" uid="uid://cctkoql7wvni0" path="res://scenes/colossus_knight.tscn" id="2_e3d0d"]
+[ext_resource type="PackedScene" uid="uid://bfwn2y7kbir1d" path="res://scenes/player.tscn" id="3_csla4"]
 
 [node name="Death_void" type="Node2D"]
+script = ExtResource("1_dlnos")
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(3, -80)
+collision_layer = 11
+collision_mask = 11
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-106, 181, -1, 181, -1, 252, 541, 252, 542, -57, 599, -57, 603, 326, -166, 327, -166, -56, -106, -56)
+
+[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D/CollisionPolygon2D"]
 color = Color(0, 0, 0, 1)
-polygon = PackedVector2Array(0, -1, -106, -1, -106, 180, 0, 180, 0, 250, 538, 250, 538, -1, 559, -1, 667, -1, 667, 247, 667, 342, -330, 343, -330, -1, -330, -65, 667, -65, 667, -1, 417, -1)
+
+[node name="colossus_knight" parent="." instance=ExtResource("2_e3d0d")]
+position = Vector2(401, 104)
+
+[node name="Player" parent="." instance=ExtResource("3_csla4")]
+position = Vector2(-54, 82)

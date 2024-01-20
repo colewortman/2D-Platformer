@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/enemy_knight.gd" id="1_j6438"]
 [ext_resource type="PackedScene" uid="uid://cw0dyuimranom" path="res://scenes/health_component.tscn" id="2_ogalm"]
-[ext_resource type="Texture2D" uid="uid://c2w5o8vfvm6om" path="res://scenes/enemy_knight.png" id="2_xhhgj"]
+[ext_resource type="Texture2D" uid="uid://c2w5o8vfvm6om" path="res://assets/enemy_knight.png" id="2_xhhgj"]
 [ext_resource type="PackedScene" uid="uid://b05t7qod7tx3" path="res://scenes/hitbox_component.tscn" id="3_04rcx"]
 [ext_resource type="PackedScene" uid="uid://x82pl1gdhc0g" path="res://scenes/popup_component.tscn" id="5_2xt0f"]
 [ext_resource type="PackedScene" uid="uid://jy4d2cdbie5j" path="res://scenes/floating_numbers.tscn" id="6_2hrmu"]
@@ -223,7 +223,7 @@ experience = 20
 clip_children = 2
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_16i2n")
-animation = &"death"
+animation = &"run"
 metadata/_aseprite_wizard_config_ = {
 "layer": "",
 "o_ex_p": "",

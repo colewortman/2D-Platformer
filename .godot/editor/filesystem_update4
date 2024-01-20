@@ -2,3 +2,14 @@ res://scripts/colossal_knight.gd
 res://scenes/colossal_knight.tscn
 res://scenes/colossus_knight.tscn
 res://scripts/colossus_knight.gd
+res://scenes/world.tscn
+res://scenes/player.tscn
+res://scenes/enemy_guard.tscn
+res://scenes/souls.tscn
+res://scenes/enemy_mage.tscn
+res://scenes/lightning.tscn
+res://scenes/enemy_knight.tscn
+res://scenes/tendril.tscn
+res://scenes/void_bomb.tscn
+res://scenes/death_void.tscn
+res://scripts/death_void.gd
