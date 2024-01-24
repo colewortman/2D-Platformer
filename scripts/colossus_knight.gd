@@ -1,8 +1,8 @@
 extends CharacterBody2D
 
-@onready var player = $/root/Death_void/Player
-@onready var anim = $AnimatedSprite2D
+@export var player : CharacterBody2D
 @export var loot_base : Node2D
+@onready var anim = $AnimatedSprite2D
 
 @export var attack_damage: float
 @export var knockback_force: float

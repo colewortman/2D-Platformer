@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 @onready var anim = $AnimatedSprite2D
-@onready var player = $/root/World/Player
+var player
 var direction_right
 
 var speed = 100.0

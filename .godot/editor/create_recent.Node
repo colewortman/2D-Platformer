@@ -1,6 +1,8 @@
-Timer
-Node2D
 CollisionShape2D
+AnimatableBody2D
+Node2D
+TileMap
+Timer
 CharacterBody2D
 StaticBody2D
 CollisionPolygon2D
@@ -13,9 +15,7 @@ Label
 AnimationPlayer
 Line2D
 Sprite2D
-AnimatableBody2D
 Camera2D
-TileMap
 ParallaxLayer
 ParallaxBackground
 ColorRect

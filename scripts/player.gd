@@ -63,6 +63,7 @@ func _physics_process(delta):
 		
 		souls -= 30
 		var new_void_bomb = void_bomb.instantiate()
+		new_void_bomb.player = $"."
 		new_void_bomb.global_position = $weapon/Weapon_area/Marker2D.global_position
 		summon_base.add_child(new_void_bomb)
 	
