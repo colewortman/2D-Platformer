@@ -11,5 +11,5 @@ res://scenes/void_bomb.tscn
 res://scenes/death_void.tscn
 res://scenes/colossus_knight.tscn
 res://scripts/colossus_knight.gd
-res://scripts/player.gd
-res://scripts/void_bomb.gd
+res://scripts/HealthComponent.gd
+res://scripts/Popup_location.gd

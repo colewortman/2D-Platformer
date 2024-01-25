@@ -45,8 +45,6 @@ func _process(delta):
 			state = states.SLAM
 			$Shield/shield_hitbox.disabled = false
 			$slam_timer.start()
-			$slam_collision_timer.start()
-		
 		if state == states.BASH and $bash_timer.is_stopped():
 			$bash_timer.start()
 	
@@ -79,8 +77,6 @@ func handle_states():
 			speed = 0.0
 			
 			anim.play("slam1")
-			$shield_collision.set_collision_layer_value(1, false)
-			$shield_collision.set_collision_mask_value(1, false)
 
 func handle_flipping():
 	
@@ -94,15 +90,13 @@ func handle_flipping():
 		$flip_timer.start()
 		
 	if anim.flip_h == true:
-		$shield_collision.rotation_degrees = 180
-		$body_rigid.rotation_degrees = 180
+		$collision_body.rotation_degrees = 0
 		$Detection_area.rotation_degrees = 180
 		$Shield.rotation_degrees = 180
 		$HitboxComponent.rotation_degrees = 180
 		$HitboxComponent2.rotation_degrees = 180
 	else:
-		$shield_collision.rotation_degrees = 0
-		$body_rigid.rotation_degrees = 0
+		$collision_body.rotation_degrees = 180
 		$Detection_area.rotation_degrees = 0
 		$Shield.rotation_degrees = 0
 		$HitboxComponent.rotation_degrees = 0
@@ -136,7 +130,7 @@ func _on_hitbox_component_hit():
 		$AnimatedSprite2D/ColorRect.visible = true
 		$hurt.play("hurt")
 		$Hurt_timer.start()
-		$HealthComponent.crit_zone = true
+		$HealthComponent.crit_zone = false
 		
 func _on_shield_area_entered(area):
 	if area.has_method("damage"):
@@ -169,10 +163,6 @@ func _on_slam_timer_timeout():
 	$attack_cooldown.start()
 	state = states.IDLE
 
-func _on_slam_collision_timer_timeout():
-	$shield_collision.set_collision_layer_value(1, true)
-	$shield_collision.set_collision_mask_value(1, true)
-
 func _on_attack_cooldown_timeout():
 	attack_ip = false
 
@@ -181,6 +171,6 @@ func _on_hitbox_component_2_hit():
 		$AnimatedSprite2D/ColorRect.visible = true
 		$hurt.play("hurt")
 		$Hurt_timer.start()
-		$HealthComponent.crit_zone = false
+		$HealthComponent.crit_zone = true
 
 

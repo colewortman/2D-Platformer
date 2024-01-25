@@ -11,7 +11,6 @@ func popup(attack : Attack):
 	var label = numbers.get_child(0)
 	label.text = str(attack.attack_damage)
 	if attack.crit_tracker == true:
-		print("critting display")
 		label.set("theme_override_font_sizes/font_size", 20)
 		label.set("theme_override_colors/font_color", Color(1, 0.392, 0))
 	

@@ -20,7 +20,6 @@ func damage(attack: Attack):
 		attack.crit_roll = randi_range(1, 100)
 		
 		if attack.crit_roll <= attack.crit_chance:
-			print("crit hit")
 			attack.crit_damage = randf_range(attack.attack_damage * 0.15, attack.attack_damage * 2.5)
 			attack.attack_damage += int(attack.crit_damage)
 			attack.crit_tracker = true
