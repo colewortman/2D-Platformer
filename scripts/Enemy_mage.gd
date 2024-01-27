@@ -2,9 +2,9 @@ extends CharacterBody2D
 
 @onready var player = $/root/World/Player
 @onready var anim = $AnimatedSprite2D
-@onready var loot_base = $/root/World/loot
+@export var loot_base : Node2D
 @onready var lightning = preload("res://scenes/lightning.tscn")
-@onready var summon_base = $/root/World/summon
+@export var summon_base : Node2D
 
 var speed = 0.0
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")

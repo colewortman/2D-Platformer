@@ -3,7 +3,6 @@ extends Area2D
 var speed = 200.0
 var health = 1
 @onready var anim = $AnimatedSprite2D
-@onready var player = $/root/World/Player
 var attack_ip = false
 var attack_damage = 10.0
 var crit_chance = 50

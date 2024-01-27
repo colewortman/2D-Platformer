@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://c2m81cqvhjdkb"]
+[gd_scene load_steps=10 format=3 uid="uid://c2m81cqvhjdkb"]
 
 [ext_resource type="Texture2D" uid="uid://cg40lt0bdaq6m" path="res://assets/level1_tiles.png" id="1_0i6nv"]
+[ext_resource type="Script" path="res://scripts/castle_arena.gd" id="1_c3qrq"]
 [ext_resource type="PackedScene" uid="uid://cctkoql7wvni0" path="res://scenes/colossus_knight.tscn" id="2_6f8w3"]
 [ext_resource type="PackedScene" uid="uid://bfwn2y7kbir1d" path="res://scenes/player.tscn" id="3_jvefj"]
 [ext_resource type="PackedScene" uid="uid://blob7hpwc781b" path="res://scenes/souls.tscn" id="4_0vlrs"]
@@ -150,7 +151,9 @@ size = Vector2(32, 7)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_14mfc"]
 size = Vector2(32, 7)
 
-[node name="castle_arena" type="Node2D"]
+[node name="castle_arena" type="Node2D" node_paths=PackedStringArray("player")]
+script = ExtResource("1_c3qrq")
+player = NodePath("Player")
 
 [node name="TileMap" type="TileMap" parent="."]
 z_index = -1

@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 @onready var player = $/root/World/Player
 @onready var anim = $AnimatedSprite2D
-@onready var loot_base = $/root/World/loot
+@export var loot_base : Node2D
 
 @export var attack_damage: float
 @export var knockback_force: float

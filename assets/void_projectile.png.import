@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://gg0r7h7bjewa"
-path="res://.godot/imported/enemy_colossus_knight.png-c0e905e1d1523fd7746e1c7283788bff.ctex"
+uid="uid://dre8k4kjmlxek"
+path="res://.godot/imported/void_projectile.png-2c625cc30668af8ad3b6bb8e8bb8714e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/enemy_colossus_knight.png"
-dest_files=["res://.godot/imported/enemy_colossus_knight.png-c0e905e1d1523fd7746e1c7283788bff.ctex"]
+source_file="res://assets/void_projectile.png"
+dest_files=["res://.godot/imported/void_projectile.png-2c625cc30668af8ad3b6bb8e8bb8714e.ctex"]
 
 [params]
 

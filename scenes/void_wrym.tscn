@@ -1,0 +1,274 @@
+[gd_scene load_steps=26 format=3 uid="uid://cbo71s2c75qve"]
+
+[ext_resource type="Script" path="res://scripts/void_wrym.gd" id="1_wsybd"]
+[ext_resource type="Texture2D" uid="uid://4knka8xbhu16" path="res://assets/void_wyrm.png" id="2_f1qbf"]
+[ext_resource type="PackedScene" uid="uid://cw0dyuimranom" path="res://scenes/health_component.tscn" id="2_r6bm6"]
+[ext_resource type="PackedScene" uid="uid://b05t7qod7tx3" path="res://scenes/hitbox_component.tscn" id="3_sf87j"]
+[ext_resource type="PackedScene" uid="uid://x82pl1gdhc0g" path="res://scenes/popup_component.tscn" id="4_wf5yh"]
+[ext_resource type="PackedScene" uid="uid://jy4d2cdbie5j" path="res://scenes/floating_numbers.tscn" id="6_fj8du"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_78w3l"]
+atlas = ExtResource("2_f1qbf")
+region = Rect2(384, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rq31c"]
+atlas = ExtResource("2_f1qbf")
+region = Rect2(576, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bcgji"]
+atlas = ExtResource("2_f1qbf")
+region = Rect2(0, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n4s6n"]
+atlas = ExtResource("2_f1qbf")
+region = Rect2(192, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p1cwa"]
+atlas = ExtResource("2_f1qbf")
+region = Rect2(0, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_82iva"]
+atlas = ExtResource("2_f1qbf")
+region = Rect2(192, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ji3mr"]
+atlas = ExtResource("2_f1qbf")
+region = Rect2(576, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c7gkg"]
+atlas = ExtResource("2_f1qbf")
+region = Rect2(0, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pjemx"]
+atlas = ExtResource("2_f1qbf")
+region = Rect2(192, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ai4sm"]
+atlas = ExtResource("2_f1qbf")
+region = Rect2(384, 192, 192, 192)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qm8pv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_78w3l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rq31c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bcgji")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n4s6n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bcgji")
+}],
+"loop": false,
+"name": &"fireball",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p1cwa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_82iva")
+}],
+"loop": true,
+"name": &"run",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_78w3l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ji3mr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c7gkg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pjemx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ai4sm")
+}],
+"loop": false,
+"name": &"swipe",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f0sil"]
+size = Vector2(26, 41)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_km50c"]
+size = Vector2(47.4375, 44)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gf5ak"]
+radius = 122.037
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2ru0p"]
+radius = 65.0
+
+[sub_resource type="Animation" id="Animation_jqdbf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0, 0, 0.501961)]
+}
+
+[sub_resource type="Animation" id="Animation_luqps"]
+resource_name = "hurt"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 0, 0.501961)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a0rfo"]
+_data = {
+"RESET": SubResource("Animation_jqdbf"),
+"hurt": SubResource("Animation_luqps")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7l3c6"]
+size = Vector2(184, 17)
+
+[node name="void_wrym" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 8
+collision_mask = 8
+script = ExtResource("1_wsybd")
+attack_damage = 10.0
+experience = 100
+soul_hp = 100
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+clip_children = 2
+texture_filter = 1
+position = Vector2(0, -11)
+sprite_frames = SubResource("SpriteFrames_qm8pv")
+animation = &"run"
+metadata/_aseprite_wizard_config_ = {
+"layer": "",
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"op_exp": false,
+"source": "res://assets/void_wyrm.aseprite"
+}
+
+[node name="ColorRect" type="ColorRect" parent="AnimatedSprite2D"]
+visible = false
+offset_left = -97.0
+offset_top = -64.0
+offset_right = 100.0
+offset_bottom = 98.0
+color = Color(1, 0, 0, 0.501961)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 16.5)
+shape = SubResource("RectangleShape2D_f0sil")
+
+[node name="HealthComponent" parent="." instance=ExtResource("2_r6bm6")]
+MAX_HEALTH = 1000
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component", "popup_location") instance=ExtResource("3_sf87j")]
+visible = false
+collision_layer = 4
+collision_mask = 4
+health_component = NodePath("../HealthComponent")
+popup_location = NodePath("../PopupComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(0, 17)
+shape = SubResource("RectangleShape2D_km50c")
+debug_color = Color(1, 0, 0, 0.419608)
+
+[node name="PopupComponent" parent="." instance=ExtResource("4_wf5yh")]
+visible = false
+position = Vector2(0, 0)
+damage_numbers = ExtResource("6_fj8du")
+
+[node name="projectile_spawn_left" type="Marker2D" parent="."]
+position = Vector2(-62, 0)
+
+[node name="projectile_spawn_right" type="Marker2D" parent="."]
+position = Vector2(62, 0)
+
+[node name="detection_area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="detection_area"]
+shape = SubResource("CircleShape2D_gf5ak")
+
+[node name="attack_range" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="attack_range"]
+shape = SubResource("CircleShape2D_2ru0p")
+
+[node name="hurt" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_a0rfo")
+}
+
+[node name="Hurt_timer" type="Timer" parent="."]
+wait_time = 0.3
+
+[node name="Death_timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="swipe" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="swipe"]
+position = Vector2(0, 28)
+shape = SubResource("RectangleShape2D_7l3c6")
+disabled = true
+
+[node name="swipe_timer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="swipe_cooldown" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="shoot_timer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="shoot_cooldown" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+
+[connection signal="death" from="HealthComponent" to="." method="_on_health_component_death"]
+[connection signal="hit" from="HitboxComponent" to="." method="_on_hitbox_component_hit"]
+[connection signal="body_entered" from="detection_area" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="detection_area" to="." method="_on_detection_area_body_exited"]
+[connection signal="body_entered" from="attack_range" to="." method="_on_attack_range_body_entered"]
+[connection signal="body_exited" from="attack_range" to="." method="_on_attack_range_body_exited"]
+[connection signal="timeout" from="Hurt_timer" to="." method="_on_hurt_timer_timeout"]
+[connection signal="timeout" from="Death_timer" to="." method="_on_death_timer_timeout"]
+[connection signal="area_entered" from="swipe" to="." method="_on_swipe_area_entered"]
+[connection signal="timeout" from="swipe_timer" to="." method="_on_swipe_timer_timeout"]
+[connection signal="timeout" from="swipe_cooldown" to="." method="_on_swipe_cooldown_timeout"]
+[connection signal="timeout" from="shoot_timer" to="." method="_on_shoot_timer_timeout"]
+[connection signal="timeout" from="shoot_cooldown" to="." method="_on_shoot_cooldown_timeout"]

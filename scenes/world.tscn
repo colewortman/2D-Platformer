@@ -1,10 +1,12 @@
-[gd_scene load_steps=24 format=3 uid="uid://d3v5au0s6q17d"]
+[gd_scene load_steps=27 format=3 uid="uid://d3v5au0s6q17d"]
 
 [ext_resource type="PackedScene" uid="uid://blob7hpwc781b" path="res://scenes/souls.tscn" id="1_ih24m"]
+[ext_resource type="Script" path="res://scripts/world.gd" id="1_j1jme"]
 [ext_resource type="PackedScene" uid="uid://bfwn2y7kbir1d" path="res://scenes/player.tscn" id="2_p2n6d"]
 [ext_resource type="PackedScene" uid="uid://ddt6rtpck1koy" path="res://scenes/enemy_guard.tscn" id="3_h4lb3"]
 [ext_resource type="PackedScene" uid="uid://bteed0gfmr55m" path="res://scenes/enemy_mage.tscn" id="4_kv5i3"]
 [ext_resource type="Texture2D" uid="uid://bb137qjxen400" path="res://assets/sky_background1.png" id="5_77hh7"]
+[ext_resource type="PackedScene" uid="uid://d1gp1pyb6m6sa" path="res://scenes/enemy_knight.tscn" id="5_ic6jr"]
 [ext_resource type="Texture2D" uid="uid://b3nt845bfydi3" path="res://assets/mountainbehind_background1.png" id="6_otax5"]
 [ext_resource type="Texture2D" uid="uid://crek26la2h3if" path="res://assets/mountainfront_background1.png" id="7_5n44f"]
 [ext_resource type="Texture2D" uid="uid://cg40lt0bdaq6m" path="res://assets/level1_tiles.png" id="7_tifdc"]
@@ -275,7 +277,11 @@ _data = {
 "move_loop": SubResource("Animation_amxfk")
 }
 
-[node name="World" type="Node2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_37aye"]
+
+[node name="World" type="Node2D" node_paths=PackedStringArray("player")]
+script = ExtResource("1_j1jme")
+player = NodePath("Player")
 
 [node name="souls" parent="." instance=ExtResource("1_ih24m")]
 position = Vector2(-6, 137)
@@ -286,20 +292,32 @@ hp = 80
 position = Vector2(-63, 139)
 summon_base = NodePath("../summon")
 
-[node name="Enemy_guard" parent="." instance=ExtResource("3_h4lb3")]
+[node name="Enemy_guard" parent="." node_paths=PackedStringArray("loot_base") instance=ExtResource("3_h4lb3")]
 position = Vector2(200, 144)
+loot_base = NodePath("../loot")
 
-[node name="Enemy_guard2" parent="." instance=ExtResource("3_h4lb3")]
+[node name="Enemy_guard2" parent="." node_paths=PackedStringArray("loot_base") instance=ExtResource("3_h4lb3")]
 position = Vector2(279, 15)
+loot_base = NodePath("../loot")
 
-[node name="Enemy_mage" parent="." instance=ExtResource("4_kv5i3")]
+[node name="Enemy_mage" parent="." node_paths=PackedStringArray("loot_base", "summon_base") instance=ExtResource("4_kv5i3")]
 position = Vector2(272, 96)
+loot_base = NodePath("../loot")
+summon_base = NodePath("../summon")
 
-[node name="Enemy_mage2" parent="." instance=ExtResource("4_kv5i3")]
+[node name="Enemy_mage2" parent="." node_paths=PackedStringArray("loot_base", "summon_base") instance=ExtResource("4_kv5i3")]
 position = Vector2(472, 64)
+loot_base = NodePath("../loot")
+summon_base = NodePath("../summon")
 
-[node name="Enemy_mage3" parent="." instance=ExtResource("4_kv5i3")]
+[node name="Enemy_mage3" parent="." node_paths=PackedStringArray("loot_base", "summon_base") instance=ExtResource("4_kv5i3")]
 position = Vector2(33, -18)
+loot_base = NodePath("../loot")
+summon_base = NodePath("../summon")
+
+[node name="enemy_knight" parent="." node_paths=PackedStringArray("loot_base") instance=ExtResource("5_ic6jr")]
+position = Vector2(46, -295)
+loot_base = NodePath("../loot")
 
 [node name="loot" type="Node2D" parent="."]
 
@@ -414,3 +432,11 @@ autoplay = "move_loop"
 libraries = {
 "": SubResource("AnimationLibrary_0bvjq")
 }
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="outer_bound_check" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(473, 143)
+shape = SubResource("CircleShape2D_37aye")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

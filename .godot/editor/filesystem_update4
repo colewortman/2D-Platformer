@@ -1,5 +1,7 @@
-res://scenes/castle_arena.tscn
 res://scenes/world.tscn
+res://scripts/enemy_guard.gd
+res://scripts/enemy_knight.gd
+res://scripts/Enemy_mage.gd
 res://scenes/player.tscn
 res://scenes/enemy_guard.tscn
 res://scenes/souls.tscn
@@ -10,6 +12,13 @@ res://scenes/tendril.tscn
 res://scenes/void_bomb.tscn
 res://scenes/death_void.tscn
 res://scenes/colossus_knight.tscn
-res://scripts/colossus_knight.gd
-res://scripts/HealthComponent.gd
-res://scripts/Popup_location.gd
+res://scenes/castle_arena.tscn
+res://scripts/world.gd
+res://scripts/player.gd
+res://scripts/castle_arena.gd
+res://scenes/void_wrym.tscn
+res://scripts/void_wrym.gd
+res://scenes/void_projectile.tscn
+res://scenes/arrow.tscn
+res://scripts/arrow.gd
+res://scripts/void_projectile.gd

@@ -1,54 +1,54 @@
 [gd_scene load_steps=28 format=3 uid="uid://cctkoql7wvni0"]
 
 [ext_resource type="Script" path="res://scripts/colossus_knight.gd" id="1_h00j2"]
-[ext_resource type="Texture2D" uid="uid://gg0r7h7bjewa" path="res://scenes/enemy_colossus_knight.png" id="2_10pqu"]
+[ext_resource type="Texture2D" uid="uid://gg0r7h7bjewa" path="res://assets/enemy_colossus_knight.png" id="2_avggm"]
 [ext_resource type="PackedScene" uid="uid://cw0dyuimranom" path="res://scenes/health_component.tscn" id="3_6xkw0"]
 [ext_resource type="PackedScene" uid="uid://b05t7qod7tx3" path="res://scenes/hitbox_component.tscn" id="4_0xlcu"]
 [ext_resource type="PackedScene" uid="uid://x82pl1gdhc0g" path="res://scenes/popup_component.tscn" id="5_x7jom"]
 [ext_resource type="PackedScene" uid="uid://jy4d2cdbie5j" path="res://scenes/floating_numbers.tscn" id="6_dhwd4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sq0we"]
-atlas = ExtResource("2_10pqu")
+atlas = ExtResource("2_avggm")
 region = Rect2(256, 512, 256, 256)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6xtic"]
-atlas = ExtResource("2_10pqu")
+atlas = ExtResource("2_avggm")
 region = Rect2(512, 512, 256, 256)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m8srq"]
-atlas = ExtResource("2_10pqu")
+atlas = ExtResource("2_avggm")
 region = Rect2(768, 256, 256, 256)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t025w"]
-atlas = ExtResource("2_10pqu")
+atlas = ExtResource("2_avggm")
 region = Rect2(0, 512, 256, 256)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nhf82"]
-atlas = ExtResource("2_10pqu")
+atlas = ExtResource("2_avggm")
 region = Rect2(0, 0, 256, 256)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kglsa"]
-atlas = ExtResource("2_10pqu")
+atlas = ExtResource("2_avggm")
 region = Rect2(256, 0, 256, 256)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l0evk"]
-atlas = ExtResource("2_10pqu")
+atlas = ExtResource("2_avggm")
 region = Rect2(512, 0, 256, 256)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nfxlu"]
-atlas = ExtResource("2_10pqu")
+atlas = ExtResource("2_avggm")
 region = Rect2(768, 0, 256, 256)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mt1xw"]
-atlas = ExtResource("2_10pqu")
+atlas = ExtResource("2_avggm")
 region = Rect2(0, 256, 256, 256)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4kii3"]
-atlas = ExtResource("2_10pqu")
+atlas = ExtResource("2_avggm")
 region = Rect2(256, 256, 256, 256)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8kvlq"]
-atlas = ExtResource("2_10pqu")
+atlas = ExtResource("2_avggm")
 region = Rect2(512, 256, 256, 256)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_tquiv"]
@@ -167,6 +167,8 @@ size = Vector2(88, 121)
 collision_layer = 9
 collision_mask = 9
 script = ExtResource("1_h00j2")
+experience = 150
+soul_hp = 150
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 clip_children = 2

@@ -27,6 +27,7 @@ var tendril_active = false
 var souls = 0
 var attack_damage
 var crit_chance
+var dead = false
 
 func _physics_process(delta):
 	apply_gravity(delta)
@@ -249,6 +250,7 @@ func _on_collect_area_area_entered(area):
 
 func _on_health_component_death():
 	print("died")
+	dead = true
 #end _on_health_component_death()
 
 func _on_hitbox_component_hit():

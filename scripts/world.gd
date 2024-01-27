@@ -1,8 +1,16 @@
 extends Node2D
 
-@onready var collision_polygon_2d = $StaticBody2D/CollisionPolygon2D
+@export var player : CharacterBody2D
+var lock = true
 
-@onready var polygon_2d = $StaticBody2D/CollisionPolygon2D/Polygon2D
+func _process(delta):
+	if not $enemy_knight:
+		lock = false
+	
+	if player.dead:
+		get_tree().change_scene_to_file("res://scenes/death_void.tscn")
 
-func _ready():
-	polygon_2d.polygon = collision_polygon_2d.polygon
+
+func _on_area_2d_body_entered(body: CharacterBody2D):
+	if body == player and lock == false:
+		get_tree().change_scene_to_file("res://scenes/castle_arena.tscn")
