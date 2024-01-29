@@ -1015,8 +1015,9 @@ one_shot = true
 [node name="Attack_timer" type="Timer" parent="."]
 one_shot = true
 
-[node name="HealthComponent" parent="." instance=ExtResource("4_hcovj")]
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("player") instance=ExtResource("4_hcovj")]
 visible = false
+player = NodePath("..")
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("5_xmdfy")]
 health_component = NodePath("../HealthComponent")

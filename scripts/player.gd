@@ -10,6 +10,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 #animation variables
 @onready var anim = $rogue_anim
+@onready var HealthComponent = $HealthComponent
 var transform_allow = true
 var just_transformed = false
 var attack_ip = false
@@ -24,10 +25,14 @@ var tendril_active = false
 
 #player stats variables
 @export var summon_base : Node2D
-var souls = 0
+var souls = Global.souls
 var attack_damage
 var crit_chance
 var dead = false
+
+func _ready():
+	print("health: ", $HealthComponent.health)
+	print("souls: ", souls)
 
 func _physics_process(delta):
 	apply_gravity(delta)

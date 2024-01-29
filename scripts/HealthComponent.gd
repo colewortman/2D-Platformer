@@ -2,6 +2,7 @@ extends Node2D
 class_name HealthComponent
 
 @export var MAX_HEALTH := 100
+@export var player : CharacterBody2D
 var health : float
 var crit_zone = false
 
@@ -10,7 +11,10 @@ signal death
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
-	health = MAX_HEALTH
+	if player:
+		health = Global.health
+	else:
+		health = MAX_HEALTH
 
 func damage(attack: Attack):
 	if attack.player_attack:

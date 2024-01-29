@@ -3,6 +3,7 @@ extends CharacterBody2D
 @onready var player = $/root/World/Player
 @onready var anim = $AnimatedSprite2D
 @export var loot_base : Node2D
+@export var key_enemy : bool
 
 @export var attack_damage: float
 @export var knockback_force: float
@@ -30,6 +31,8 @@ enum states{
 }
 
 func _process(delta):
+	if key_enemy == true and state == states.DEATH:
+		Global.lock = false
 	
 	if !state == states.DEATH and $Death_timer.is_stopped() == true:
 		handle_physics(delta)

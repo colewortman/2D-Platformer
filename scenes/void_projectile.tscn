@@ -1,42 +1,42 @@
 [gd_scene load_steps=14 format=3 uid="uid://cpulme8ybm4li"]
 
 [ext_resource type="Script" path="res://scripts/void_projectile.gd" id="1_4pei1"]
-[ext_resource type="Texture2D" uid="uid://d015t6vq2ehlm" path="res://scenes/void_projectile.png" id="1_l18ci"]
+[ext_resource type="Texture2D" uid="uid://d015t6vq2ehlm" path="res://assets/void_projectile.png" id="2_5ox2n"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ksaxk"]
-atlas = ExtResource("1_l18ci")
+atlas = ExtResource("2_5ox2n")
 region = Rect2(0, 128, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cryo8"]
-atlas = ExtResource("1_l18ci")
+atlas = ExtResource("2_5ox2n")
 region = Rect2(64, 128, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_atm42"]
-atlas = ExtResource("1_l18ci")
+atlas = ExtResource("2_5ox2n")
 region = Rect2(128, 128, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vqctk"]
-atlas = ExtResource("1_l18ci")
+atlas = ExtResource("2_5ox2n")
 region = Rect2(64, 64, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wq52d"]
-atlas = ExtResource("1_l18ci")
+atlas = ExtResource("2_5ox2n")
 region = Rect2(128, 64, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vfciu"]
-atlas = ExtResource("1_l18ci")
+atlas = ExtResource("2_5ox2n")
 region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pgfuw"]
-atlas = ExtResource("1_l18ci")
+atlas = ExtResource("2_5ox2n")
 region = Rect2(64, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pynmf"]
-atlas = ExtResource("1_l18ci")
+atlas = ExtResource("2_5ox2n")
 region = Rect2(128, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yyd86"]
-atlas = ExtResource("1_l18ci")
+atlas = ExtResource("2_5ox2n")
 region = Rect2(0, 64, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_wf0sb"]

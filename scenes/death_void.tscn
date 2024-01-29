@@ -7,8 +7,9 @@
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_21epd"]
 b = Vector2(871, -1)
 
-[node name="Death_void" type="Node2D"]
+[node name="Death_void" type="Node2D" node_paths=PackedStringArray("player")]
 script = ExtResource("1_dlnos")
+player = NodePath("Player")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(2, -86)

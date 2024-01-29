@@ -318,6 +318,7 @@ summon_base = NodePath("../summon")
 [node name="enemy_knight" parent="." node_paths=PackedStringArray("loot_base") instance=ExtResource("5_ic6jr")]
 position = Vector2(46, -295)
 loot_base = NodePath("../loot")
+key_enemy = true
 
 [node name="loot" type="Node2D" parent="."]
 
