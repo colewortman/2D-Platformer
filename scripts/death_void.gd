@@ -11,4 +11,8 @@ func _process(delta):
 	if player.dead:
 		Global.lock = true
 		Global.reset_stats()
+		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+	
+	if Global.void_defeated:
+		Global.update_player_stats(player)
 		get_tree().change_scene_to_file("res://scenes/world.tscn")

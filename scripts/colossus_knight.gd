@@ -3,6 +3,7 @@ extends CharacterBody2D
 @export var player : CharacterBody2D
 @export var loot_base : Node2D
 @onready var anim = $AnimatedSprite2D
+@export var key_enemy : bool
 
 @export var attack_damage: float
 @export var knockback_force: float
@@ -32,6 +33,9 @@ enum states{
 }
 
 func _process(delta):
+	if state == states.DEATH and key_enemy == true:
+		Global.castle_defeated = true
+	
 	if !state == states.DEATH and $Death_timer.is_stopped() == true:
 		handle_physics(delta)
 		handle_flipping()

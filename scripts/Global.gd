@@ -1,6 +1,8 @@
 extends Node
 
-var lock = false
+var lock = true
+var castle_defeated = false
+var void_defeated = false
 var base_health = 100
 var base_souls = 0
 var health

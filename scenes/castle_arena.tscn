@@ -169,6 +169,7 @@ summon_base = NodePath("../objects")
 position = Vector2(257, 90)
 player = NodePath("../Player")
 loot_base = NodePath("../objects")
+key_enemy = true
 
 [node name="objects" type="Node2D" parent="."]
 

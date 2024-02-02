@@ -9,3 +9,8 @@ func _process(delta):
 	if player.dead:
 		Global.reset_stats()
 		get_tree().change_scene_to_file("res://scenes/death_void.tscn")
+		
+	if Global.castle_defeated:
+		Global.lock = true
+		Global.reset_stats()
+		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")

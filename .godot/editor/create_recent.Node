@@ -1,3 +1,8 @@
+Sprite2D
+TextureRect
+Button
+Label
+ColorRect
 Timer
 CollisionShape2D
 AnimatedSprite2D
@@ -11,12 +16,9 @@ Node2D
 CollisionPolygon2D
 Polygon2D
 RigidBody2D
-Label
 AnimationPlayer
 Line2D
-Sprite2D
 Camera2D
 ParallaxLayer
 ParallaxBackground
-ColorRect
 AudioStreamPlayer
