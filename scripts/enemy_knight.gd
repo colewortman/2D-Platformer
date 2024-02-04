@@ -9,7 +9,7 @@ extends CharacterBody2D
 @export var knockback_force: float
 @export var stun_damage: float
 
-var speed = 10.0
+var speed = 15.0
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var soul = preload("res://scenes/souls.tscn")
 @export var experience := 2

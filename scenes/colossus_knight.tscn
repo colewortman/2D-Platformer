@@ -118,7 +118,7 @@ radius = 18.0
 height = 50.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rac27"]
-size = Vector2(76, 134.5)
+size = Vector2(84, 134.5)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h6smu"]
 radius = 76.0066
@@ -174,7 +174,7 @@ soul_hp = 150
 clip_children = 2
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_tquiv")
-animation = &"bash1"
+animation = &"idle"
 metadata/_aseprite_wizard_config_ = {
 "layer": "",
 "o_ex_p": "",
@@ -194,6 +194,7 @@ offset_bottom = 82.0
 color = Color(1, 0, 0, 0.501961)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_ewi6r")
 
@@ -238,10 +239,9 @@ shape = SubResource("CapsuleShape2D_iwypv")
 debug_color = Color(1, 0, 0, 0.419608)
 
 [node name="Shield" type="Area2D" parent="."]
-visible = false
 
 [node name="shield_hitbox" type="CollisionShape2D" parent="Shield"]
-position = Vector2(-47, -4.75)
+position = Vector2(-42, 0)
 shape = SubResource("RectangleShape2D_rac27")
 disabled = true
 debug_color = Color(1, 0.87451, 0, 0.45098)
@@ -286,6 +286,7 @@ one_shot = true
 one_shot = true
 
 [node name="collision_body" type="CharacterBody2D" parent="."]
+visible = false
 position = Vector2(0, 3)
 rotation = 3.14159
 collision_layer = 2

@@ -1,8 +1,11 @@
+ColorRect
+AnimationPlayer
+Node2D
+Node
 Sprite2D
 TextureRect
 Button
 Label
-ColorRect
 Timer
 CollisionShape2D
 AnimatedSprite2D
@@ -12,11 +15,9 @@ CharacterBody2D
 AnimatableBody2D
 StaticBody2D
 TileMap
-Node2D
 CollisionPolygon2D
 Polygon2D
 RigidBody2D
-AnimationPlayer
 Line2D
 Camera2D
 ParallaxLayer

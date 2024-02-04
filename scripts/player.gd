@@ -31,6 +31,7 @@ var crit_chance
 var dead = false
 
 func _ready():
+	$effects.play("fade_in")
 	print("health: ", $HealthComponent.health)
 	print("souls: ", souls)
 
@@ -47,7 +48,7 @@ func _physics_process(delta):
 	handle_acceleration(input_axis, delta)
 	apply_friction(input_axis, delta)
 	update_movement_animations(input_axis)
-	handle_dash(input_axis, delta)
+	handle_dash()
 	
 	if Input.is_action_just_pressed("transform") and attack_ip == false:
 		handle_transform()
@@ -200,7 +201,7 @@ func update_movement_animations(input_axis):
 		anim.play("jump")
 #end handle_update_animations()
 
-func handle_dash(input_axis, delta):
+func handle_dash():
 	if Input.is_action_just_pressed("dash") and dash_ip == false:
 		dash_ip = true
 		if anim == $rogue_anim:
