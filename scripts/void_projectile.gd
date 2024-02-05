@@ -13,7 +13,7 @@ func _ready():
 	$spawn_timer.start()
 	$duration_timer.start()
 
-func _process(delta):
+func _process(_delta):
 	global_position += speed*(player.global_position - global_position).normalized()
 
 func _on_hit_timer_timeout():

@@ -40,5 +40,4 @@ func _on_area_entered(area):
 
 
 func _on_life_timer_timeout():
-	print("freed")
 	self.queue_free()

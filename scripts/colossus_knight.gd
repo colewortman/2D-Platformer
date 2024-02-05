@@ -119,7 +119,6 @@ func _on_detection_area_body_exited(body):
 		player_far = true
 	
 func _on_health_component_death():
-	print("signal recieved")
 	state = states.DEATH
 	if $Death_timer.is_stopped():
 		anim.play("death")
@@ -161,7 +160,6 @@ func _on_flip_timer_timeout():
 
 func _on_bash_timer_timeout():
 	state = states.IDLE
-	print("bash done")
 	$Shield/shield_hitbox.disabled = true
 	anim.play("idle")
 	$attack_cooldown.start()

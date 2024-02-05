@@ -89,7 +89,6 @@ func _on_detection_area_body_entered(body):
 
 
 func _on_health_component_death():
-	print("signal recieved")
 	state = states.DEATH
 	if $Death_timer.is_stopped():
 		anim.play("death")

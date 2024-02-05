@@ -9,7 +9,7 @@ func _ready():
 	player.boss_bar.visible = true
 	player.boss_name.text = "VOID WYRM"
 
-func _process(delta):
+func _process(_delta):
 	if player.dead:
 		player.boss_bar.visible = false
 		Global.lock = true

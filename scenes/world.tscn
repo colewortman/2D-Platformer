@@ -225,7 +225,7 @@ size = Vector2(142, 5)
 size = Vector2(78, 6)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_r73s3"]
-a = Vector2(0, -183)
+a = Vector2(0, -665)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j1tmm"]
 size = Vector2(30, 5.5)
@@ -288,6 +288,11 @@ position = Vector2(-6, 137)
 experience = 30
 hp = 80
 
+[node name="souls2" parent="." instance=ExtResource("1_ih24m")]
+position = Vector2(589, 135)
+experience = 30
+hp = 80
+
 [node name="Player" parent="." node_paths=PackedStringArray("summon_base") instance=ExtResource("2_p2n6d")]
 position = Vector2(-63, 139)
 summon_base = NodePath("../summon")
@@ -311,7 +316,7 @@ loot_base = NodePath("../loot")
 summon_base = NodePath("../summon")
 
 [node name="Enemy_mage3" parent="." node_paths=PackedStringArray("loot_base", "summon_base") instance=ExtResource("4_kv5i3")]
-position = Vector2(33, -18)
+position = Vector2(32, -17)
 loot_base = NodePath("../loot")
 summon_base = NodePath("../summon")
 
@@ -392,7 +397,7 @@ shape = SubResource("RectangleShape2D_efr3w")
 one_way_collision = true
 
 [node name="outer_bound1" type="CollisionShape2D" parent="platforms"]
-position = Vector2(487, 150)
+position = Vector2(662, 164)
 shape = SubResource("SegmentShape2D_r73s3")
 
 [node name="single_platform1" type="CollisionShape2D" parent="platforms"]

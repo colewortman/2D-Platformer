@@ -27,7 +27,7 @@ var tendril_active = false
 
 #player stats variables
 @export var summon_base : Node2D
-var souls = Global.souls
+@onready var souls = Global.souls
 var attack_damage
 var crit_chance
 var dead = false
@@ -265,7 +265,6 @@ func handle_lowhp():
 		$GUI_layer/GUI_node/hurt_screen.visible = false
 
 func _on_health_component_death():
-	print("died")
 	dead = true
 #end _on_health_component_death()
 

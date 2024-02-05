@@ -78,7 +78,6 @@ func _on_detection_area_body_exited(body):
 		player_in_range = false
 
 func _on_health_component_death():
-	print("signal recieved")
 	anim.play("idle")
 	state = states.DEATH
 	if $Death_timer.is_stopped():

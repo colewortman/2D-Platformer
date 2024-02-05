@@ -20,7 +20,6 @@ func collect():
 		collected = true
 		$AudioStreamPlayer.play()
 		$AnimatedSprite2D.visible = false
-		print(experience)
 		return experience
 
 func get_health():

@@ -16,7 +16,6 @@ var enemy_in_range = []
 
 func _ready():
 	$Duration.start()
-	print("spawned")
 	$SpawnDelay_timer.start()
 	
 	

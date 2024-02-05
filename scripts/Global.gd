@@ -13,16 +13,13 @@ func _ready():
 		reset_stats()
 
 func update_player_stats(player : CharacterBody2D):
-	print("updating")
 	health = player.HealthComponent.health
 	souls = player.souls
 
 func use_stats(player : CharacterBody2D):
-	print("using")
 	player.HealthComponent.health = health
 	player.souls = souls
 
 func reset_stats():
-	print("resetting")
 	health = base_health
 	souls = base_souls

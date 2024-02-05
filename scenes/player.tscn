@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cw0dyuimranom" path="res://scenes/health_component.tscn" id="4_hcovj"]
 [ext_resource type="PackedScene" uid="uid://b05t7qod7tx3" path="res://scenes/hitbox_component.tscn" id="5_xmdfy"]
 [ext_resource type="PackedScene" uid="uid://cqxs02iybu80h" path="res://scenes/healthbar_component.tscn" id="7_8lxqk"]
-[ext_resource type="Texture2D" uid="uid://kw5fjudyefon" path="res://scenes/hurt.png" id="8_5nl8e"]
+[ext_resource type="Texture2D" uid="uid://b5kc4mwocw1pq" path="res://assets/hurt.png" id="8_0h1tu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3w1qv"]
 atlas = ExtResource("2_w2iau")
@@ -923,6 +923,10 @@ tracks/4/keys = {
 "values": [Color(0, 0, 0, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_4extb"]
+length = 0.2
+loop_mode = 1
+
 [sub_resource type="Animation" id="Animation_o1qkh"]
 resource_name = "fade_in"
 tracks/0/type = "value"
@@ -966,10 +970,6 @@ tracks/1/keys = {
 "values": [Color(1, 1, 1, 1), Color(1, 0, 0, 0.784314)]
 }
 
-[sub_resource type="Animation" id="Animation_4extb"]
-length = 0.2
-loop_mode = 1
-
 [sub_resource type="Animation" id="Animation_4xbwl"]
 resource_name = "low_health"
 
@@ -982,26 +982,26 @@ _data = {
 "low_health": SubResource("Animation_4xbwl")
 }
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_4gmca"]
-atlas = ExtResource("8_5nl8e")
+[sub_resource type="AtlasTexture" id="AtlasTexture_llggv"]
+atlas = ExtResource("8_0h1tu")
 region = Rect2(0, 0, 320, 180)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_cmb8e"]
-atlas = ExtResource("8_5nl8e")
+[sub_resource type="AtlasTexture" id="AtlasTexture_44m4g"]
+atlas = ExtResource("8_0h1tu")
 region = Rect2(320, 0, 320, 180)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_tpraj"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_54n4x"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_4gmca")
+"texture": SubResource("AtlasTexture_llggv")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_cmb8e")
+"texture": SubResource("AtlasTexture_44m4g")
 }],
 "loop": true,
 "name": &"default",
-"speed": 2.0
+"speed": 10.0
 }]
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
@@ -1215,7 +1215,7 @@ vertical_alignment = 1
 [node name="hurt_screen" type="AnimatedSprite2D" parent="GUI_layer/GUI_node"]
 texture_filter = 1
 position = Vector2(160, 89)
-sprite_frames = SubResource("SpriteFrames_tpraj")
+sprite_frames = SubResource("SpriteFrames_54n4x")
 metadata/_aseprite_wizard_config_ = {
 "layer": "",
 "o_ex_p": "",
