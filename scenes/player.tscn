@@ -1,4 +1,4 @@
-[gd_scene load_steps=116 format=3 uid="uid://bfwn2y7kbir1d"]
+[gd_scene load_steps=123 format=3 uid="uid://bfwn2y7kbir1d"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_ikava"]
 [ext_resource type="PackedScene" uid="uid://b8m205aiult4w" path="res://scenes/trail.tscn" id="2_v8b08"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://bo2trmo3v68vm" path="res://assets/monster_player.png" id="3_gtm0j"]
 [ext_resource type="PackedScene" uid="uid://cw0dyuimranom" path="res://scenes/health_component.tscn" id="4_hcovj"]
 [ext_resource type="PackedScene" uid="uid://b05t7qod7tx3" path="res://scenes/hitbox_component.tscn" id="5_xmdfy"]
+[ext_resource type="PackedScene" uid="uid://cqxs02iybu80h" path="res://scenes/healthbar_component.tscn" id="7_8lxqk"]
+[ext_resource type="Texture2D" uid="uid://kw5fjudyefon" path="res://scenes/hurt.png" id="8_5nl8e"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3w1qv"]
 atlas = ExtResource("2_w2iau")
@@ -921,6 +923,21 @@ tracks/4/keys = {
 "values": [Color(0, 0, 0, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_o1qkh"]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("transition_color:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_7hr1i"]
 resource_name = "hurt"
 length = 0.3
@@ -949,27 +966,43 @@ tracks/1/keys = {
 "values": [Color(1, 1, 1, 1), Color(1, 0, 0, 0.784314)]
 }
 
-[sub_resource type="Animation" id="Animation_o1qkh"]
-resource_name = "fade_in"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("transition_color:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
-}
+[sub_resource type="Animation" id="Animation_4extb"]
+length = 0.2
+loop_mode = 1
+
+[sub_resource type="Animation" id="Animation_4xbwl"]
+resource_name = "low_health"
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2ayx2"]
 _data = {
 "RESET": SubResource("Animation_m18ia"),
+"default": SubResource("Animation_4extb"),
 "fade_in": SubResource("Animation_o1qkh"),
-"hurt": SubResource("Animation_7hr1i")
+"hurt": SubResource("Animation_7hr1i"),
+"low_health": SubResource("Animation_4xbwl")
 }
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4gmca"]
+atlas = ExtResource("8_5nl8e")
+region = Rect2(0, 0, 320, 180)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cmb8e"]
+atlas = ExtResource("8_5nl8e")
+region = Rect2(320, 0, 320, 180)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tpraj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4gmca")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cmb8e")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 top_level = true
@@ -1131,6 +1164,67 @@ one_shot = true
 
 [node name="Dash_cooldown" type="Timer" parent="."]
 one_shot = true
+
+[node name="GUI_layer" type="CanvasLayer" parent="."]
+
+[node name="GUI_node" type="Control" parent="GUI_layer"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = -89.5
+offset_right = 160.0
+offset_bottom = 89.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="healthbar_component" parent="GUI_layer/GUI_node" instance=ExtResource("7_8lxqk")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = -74.5
+offset_right = 125.0
+offset_bottom = -70.5
+
+[node name="Label" type="Label" parent="GUI_layer/GUI_node/healthbar_component"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -73.5
+offset_top = -22.0
+offset_right = 73.5
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 12
+text = "COLOSSUS KNIGHT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="hurt_screen" type="AnimatedSprite2D" parent="GUI_layer/GUI_node"]
+texture_filter = 1
+position = Vector2(160, 89)
+sprite_frames = SubResource("SpriteFrames_tpraj")
+metadata/_aseprite_wizard_config_ = {
+"layer": "",
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"op_exp": false,
+"source": "res://assets/hurt.aseprite"
+}
 
 [connection signal="timeout" from="Transformation_timer" to="." method="_on_transformation_timer_timeout"]
 [connection signal="timeout" from="Attack_timer" to="." method="_on_attack_timer_timeout"]

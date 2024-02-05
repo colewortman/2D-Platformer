@@ -3,6 +3,7 @@ extends CharacterBody2D
 @export var player : CharacterBody2D
 @export var loot_base : Node2D
 @onready var anim = $AnimatedSprite2D
+@onready var healthbar = player.boss_bar
 @export var key_enemy : bool
 
 @export var attack_damage: float
@@ -31,6 +32,9 @@ enum states{
 	DEATH
 	
 }
+
+func _ready():
+	healthbar.init_health($HealthComponent.health)
 
 func _process(delta):
 	if state == states.DEATH and key_enemy == true:
@@ -130,6 +134,7 @@ func _on_death_timer_timeout():
 	queue_free()
 
 func _on_hitbox_component_hit():
+	healthbar.set_health($HealthComponent.health)
 	if !state == states.DEATH:
 		$AnimatedSprite2D/ColorRect.visible = true
 		$hurt.play("hurt")
@@ -171,6 +176,7 @@ func _on_attack_cooldown_timeout():
 	attack_ip = false
 
 func _on_hitbox_component_2_hit():
+	healthbar.set_health($HealthComponent.health)
 	if !state == states.DEATH:
 		$AnimatedSprite2D/ColorRect.visible = true
 		$hurt.play("hurt")

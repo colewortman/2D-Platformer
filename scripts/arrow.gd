@@ -37,3 +37,8 @@ func _on_area_entered(area):
 		attack.player_attack = true
 		
 		area.damage(attack)
+
+
+func _on_life_timer_timeout():
+	print("freed")
+	self.queue_free()

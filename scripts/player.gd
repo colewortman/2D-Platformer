@@ -11,6 +11,8 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 #animation variables
 @onready var anim = $rogue_anim
 @onready var HealthComponent = $HealthComponent
+@onready var boss_bar = $GUI_layer/GUI_node/healthbar_component
+@onready var boss_name = $GUI_layer/GUI_node/healthbar_component/Label
 var transform_allow = true
 var just_transformed = false
 var attack_ip = false
@@ -38,6 +40,7 @@ func _ready():
 func _physics_process(delta):
 	apply_gravity(delta)
 	handle_jump()
+	handle_lowhp()
 	
 	if souls <= 0:
 			souls = 0
@@ -253,6 +256,13 @@ func _on_collect_area_area_entered(area):
 		souls += area.collect()
 		$HealthComponent.heal(area.get_health())
 #end  _on_collect_area_area_entered()
+
+func handle_lowhp():
+	if $HealthComponent.health <= 50:
+		$GUI_layer/GUI_node/hurt_screen.visible = true
+		$GUI_layer/GUI_node/hurt_screen.play("default")
+	else:
+		$GUI_layer/GUI_node/hurt_screen.visible = false
 
 func _on_health_component_death():
 	print("died")

@@ -199,3 +199,9 @@ hp = 50
 position = Vector2(369, 60)
 experience = 30
 hp = 50
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
