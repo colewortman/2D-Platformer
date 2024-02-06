@@ -30,10 +30,11 @@ var tendril_active = false
 @onready var souls = Global.souls
 var attack_damage
 var crit_chance
-var dead = false
+@onready var dead = false
 
 func _ready():
 	$effects.play("fade_in")
+	$GUI_layer/GUI_node/soul_count.text = str(souls)
 	print("health: ", $HealthComponent.health)
 	print("souls: ", souls)
 
@@ -46,6 +47,7 @@ func _physics_process(delta):
 			souls = 0
 	elif souls >= 100:
 		souls = 100
+		$GUI_layer/GUI_node/soul_count.text = str(souls)
 	
 	var input_axis = Input.get_axis("left", "right")
 	handle_acceleration(input_axis, delta)
@@ -72,6 +74,7 @@ func _physics_process(delta):
 			$weapon.rotation_degrees = 0
 		
 		souls -= 30
+		$GUI_layer/GUI_node/soul_count.text = str(souls)
 		var new_void_bomb = void_bomb.instantiate()
 		new_void_bomb.player = $"."
 		new_void_bomb.global_position = $weapon/Weapon_area/Marker2D.global_position
@@ -254,6 +257,7 @@ func _on_grab_area_area_entered(area):
 func _on_collect_area_area_entered(area):
 	if area.is_in_group("loot") and area.collected == false:
 		souls += area.collect()
+		$GUI_layer/GUI_node/soul_count.text = str(souls)
 		$HealthComponent.heal(area.get_health())
 #end  _on_collect_area_area_entered()
 

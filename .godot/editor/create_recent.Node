@@ -1,8 +1,8 @@
-AnimatedSprite2D
+Label
 TextureRect
+AnimatedSprite2D
 CanvasLayer
 Control
-Label
 ProgressBar
 Timer
 TextureProgressBar

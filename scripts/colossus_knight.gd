@@ -37,7 +37,7 @@ func _ready():
 	healthbar.init_health($HealthComponent.health)
 
 func _process(delta):
-	if state == states.DEATH and key_enemy == true:
+	if $HealthComponent.health <= 0 and key_enemy == true:
 		Global.castle_defeated = true
 	
 	if !state == states.DEATH and $Death_timer.is_stopped() == true:

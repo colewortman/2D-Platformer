@@ -1,4 +1,4 @@
-[gd_scene load_steps=123 format=3 uid="uid://bfwn2y7kbir1d"]
+[gd_scene load_steps=125 format=3 uid="uid://bfwn2y7kbir1d"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_ikava"]
 [ext_resource type="PackedScene" uid="uid://b8m205aiult4w" path="res://scenes/trail.tscn" id="2_v8b08"]
@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://b05t7qod7tx3" path="res://scenes/hitbox_component.tscn" id="5_xmdfy"]
 [ext_resource type="PackedScene" uid="uid://cqxs02iybu80h" path="res://scenes/healthbar_component.tscn" id="7_8lxqk"]
 [ext_resource type="Texture2D" uid="uid://b5kc4mwocw1pq" path="res://assets/hurt.png" id="8_0h1tu"]
+[ext_resource type="Texture2D" uid="uid://bmxabpfh32ia0" path="res://assets/soul.png" id="9_06j3r"]
+[ext_resource type="Texture2D" uid="uid://b0jn84d6y61m8" path="res://assets/controls.png" id="10_gy5i1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3w1qv"]
 atlas = ExtResource("2_w2iau")
@@ -1213,6 +1215,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="hurt_screen" type="AnimatedSprite2D" parent="GUI_layer/GUI_node"]
+visible = false
 texture_filter = 1
 position = Vector2(160, 89)
 sprite_frames = SubResource("SpriteFrames_54n4x")
@@ -1225,6 +1228,66 @@ metadata/_aseprite_wizard_config_ = {
 "op_exp": false,
 "source": "res://assets/hurt.aseprite"
 }
+
+[node name="TextureRect" type="TextureRect" parent="GUI_layer/GUI_node"]
+layout_mode = 0
+offset_top = 147.5
+offset_right = 32.0
+offset_bottom = 179.5
+texture = ExtResource("9_06j3r")
+
+[node name="soul_count" type="Label" parent="GUI_layer/GUI_node"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 151.5
+offset_right = 65.0
+offset_bottom = 177.5
+theme_override_font_sizes/font_size = 12
+text = "0"
+vertical_alignment = 1
+
+[node name="TextureRect2" type="TextureRect" parent="GUI_layer/GUI_node"]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 103.5
+offset_right = 82.0
+offset_bottom = 167.5
+texture = ExtResource("10_gy5i1")
+
+[node name="Label" type="Label" parent="GUI_layer/GUI_node"]
+layout_mode = 0
+offset_left = 66.0
+offset_top = 108.5
+offset_right = 107.0
+offset_bottom = 158.5
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = 13
+theme_override_font_sizes/font_size = 8
+text = "special atk
+transform"
+
+[node name="Label2" type="Label" parent="GUI_layer/GUI_node"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 108.5
+offset_right = 34.0
+offset_bottom = 160.5
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = 13
+theme_override_font_sizes/font_size = 8
+text = "melee
+ultimate"
+horizontal_alignment = 2
+
+[node name="Label3" type="Label" parent="GUI_layer/GUI_node"]
+layout_mode = 0
+offset_left = 67.0
+offset_top = 144.5
+offset_right = 86.0
+offset_bottom = 159.5
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 8
+text = "dash"
 
 [connection signal="timeout" from="Transformation_timer" to="." method="_on_transformation_timer_timeout"]
 [connection signal="timeout" from="Attack_timer" to="." method="_on_attack_timer_timeout"]
