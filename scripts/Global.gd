@@ -7,6 +7,7 @@ var base_health = 100
 var base_souls = 0
 var health
 var souls
+var show_player_controls = true
 
 func _ready():
 	if health == null and souls == null:

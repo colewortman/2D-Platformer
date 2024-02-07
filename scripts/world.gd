@@ -3,6 +3,7 @@ extends Node2D
 @export var player : CharacterBody2D
 
 func _ready():
+	Engine.time_scale = 1
 	Global.use_stats(player)
 
 func _process(_delta):

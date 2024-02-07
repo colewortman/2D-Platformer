@@ -7,6 +7,8 @@ var acceleration = 800.0
 const FRICTION = 1000.0
 const JUMP_VELOCITY = -300.0
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+var paused = false
+@onready var show_controls = Global.show_player_controls
 
 #animation variables
 @onready var anim = $rogue_anim
@@ -39,48 +41,60 @@ func _ready():
 	print("souls: ", souls)
 
 func _physics_process(delta):
-	apply_gravity(delta)
-	handle_jump()
-	handle_lowhp()
+	if Input.is_action_just_pressed("escape"):
+		pause_menu()
 	
-	if souls <= 0:
-			souls = 0
-	elif souls >= 100:
-		souls = 100
-		$GUI_layer/GUI_node/soul_count.text = str(souls)
+	if show_controls:
+		$GUI_layer/GUI_node/controls_ui.visible = true
+		$GUI_layer/Menu/controls_toggle.button_pressed = true
+	else:
+		$GUI_layer/GUI_node/controls_ui.visible = false
+		$GUI_layer/Menu/controls_toggle.button_pressed = false
 	
-	var input_axis = Input.get_axis("left", "right")
-	handle_acceleration(input_axis, delta)
-	apply_friction(input_axis, delta)
-	update_movement_animations(input_axis)
-	handle_dash()
-	
-	if Input.is_action_just_pressed("transform") and attack_ip == false:
-		handle_transform()
-	
-	if Input.is_action_just_pressed("attack_main") and attack_ip == false:
-		main_attack_tracker = handle_attack(main_attack_tracker) 
-	
-	if Input.is_action_just_pressed("attack_alternate") and attack_ip == false:
-		alt_attack_tracker = handle_attack(alt_attack_tracker)
-	
-	if Input.is_action_just_pressed("down") and is_on_floor() == true:
-		position.y += 1
-	
-	if Input.is_action_just_pressed("ultimate") and souls >= 30:
-		if anim.flip_h:
-			$weapon.rotation_degrees = 180
-		else:
-			$weapon.rotation_degrees = 0
+	if not paused:
+		apply_gravity(delta)
+		handle_jump()
+		handle_lowhp()
 		
-		souls -= 30
-		$GUI_layer/GUI_node/soul_count.text = str(souls)
-		var new_void_bomb = void_bomb.instantiate()
-		new_void_bomb.player = $"."
-		new_void_bomb.global_position = $weapon/Weapon_area/Marker2D.global_position
-		summon_base.add_child(new_void_bomb)
-	
-	move_and_slide()
+		
+		if souls <= 0:
+				souls = 0
+		elif souls >= 100:
+			souls = 100
+			$GUI_layer/GUI_node/soul_count.text = str(souls)
+		
+		var input_axis = Input.get_axis("left", "right")
+		handle_acceleration(input_axis, delta)
+		apply_friction(input_axis, delta)
+		update_movement_animations(input_axis)
+		handle_dash()
+		
+		if Input.is_action_just_pressed("transform") and attack_ip == false:
+			handle_transform()
+		
+		if Input.is_action_just_pressed("attack_main") and attack_ip == false:
+			main_attack_tracker = handle_attack(main_attack_tracker) 
+		
+		if Input.is_action_just_pressed("attack_alternate") and attack_ip == false:
+			alt_attack_tracker = handle_attack(alt_attack_tracker)
+		
+		if Input.is_action_just_pressed("down") and is_on_floor() == true:
+			position.y += 1
+		
+		if Input.is_action_just_pressed("ultimate") and souls >= 30:
+			if anim.flip_h:
+				$weapon.rotation_degrees = 180
+			else:
+				$weapon.rotation_degrees = 0
+			
+			souls -= 30
+			$GUI_layer/GUI_node/soul_count.text = str(souls)
+			var new_void_bomb = void_bomb.instantiate()
+			new_void_bomb.player = $"."
+			new_void_bomb.global_position = $weapon/Weapon_area/Marker2D.global_position
+			summon_base.add_child(new_void_bomb)
+		
+		move_and_slide()
 #end _physics_process()
 
 func apply_gravity(delta):
@@ -207,6 +221,16 @@ func update_movement_animations(input_axis):
 		anim.play("jump")
 #end handle_update_animations()
 
+func pause_menu():
+	if paused:
+		$GUI_layer/Menu.hide()
+		Engine.time_scale = 1
+	else:
+		$GUI_layer/Menu.show()
+		Engine.time_scale = 0
+	
+	paused = !paused
+
 func handle_dash():
 	if Input.is_action_just_pressed("dash") and dash_ip == false:
 		dash_ip = true
@@ -318,7 +342,20 @@ func _on_dash_cooldown_timeout():
 	
 #end _on_dash_cooldown_timeout()
 
-
 func _on_i_frame_timer_timeout():
 	$Trail.visible = false
 	$HitboxComponent/hitbox_collision.disabled = false
+
+func _on_resume_pressed():
+	pause_menu()
+
+func _on_quit_pressed():
+	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+
+func _on_restart_pressed():
+	Global.reset_stats()
+	get_tree().change_scene_to_file("res://scenes/world.tscn")
+
+func _on_controls_toggle_pressed():
+	show_controls = !show_controls
+	Global.show_player_controls = show_controls

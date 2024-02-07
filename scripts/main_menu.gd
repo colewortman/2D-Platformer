@@ -1,6 +1,7 @@
 extends Control
 
 func _ready():
+	Engine.time_scale = 1
 	$AnimationPlayer.play("fade_in")
 
 func _on_start_btn_pressed():
