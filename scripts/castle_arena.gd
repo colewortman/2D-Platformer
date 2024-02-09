@@ -17,7 +17,7 @@ func _process(_delta):
 		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 		
 	if Global.castle_defeated and $Timer.is_stopped():
-		print("castle defeated")
+		$CanvasLayer/Control.visible = true
 		player.boss_bar.visible = false
 		$Timer.start()
 

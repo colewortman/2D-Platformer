@@ -1,7 +1,4 @@
-res://scripts/basic_button.gd
-res://scenes/basic_button.tscn
 res://scenes/player.tscn
-res://scripts/player.gd
 res://scenes/world.tscn
 res://scenes/enemy_guard.tscn
 res://scenes/castle_arena.tscn
@@ -12,9 +9,7 @@ res://scenes/main_menu.tscn
 res://scenes/colossus_knight.tscn
 res://scenes/arrow.tscn
 res://scenes/healthbar_component.tscn
-res://scripts/world.gd
-res://scenes/menu_node.tscn
-res://scripts/menu_node.gd
-res://scenes/menu_node.gdshader
+res://scripts/player.gd
+res://scripts/death_void.gd
 res://scripts/Global.gd
-res://scripts/main_menu.gd
+res://scripts/castle_arena.gd

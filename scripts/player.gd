@@ -41,7 +41,7 @@ func _ready():
 	print("souls: ", souls)
 
 func _physics_process(delta):
-	if Input.is_action_just_pressed("escape"):
+	if Input.is_action_just_pressed("escape") and Global.external_pause == false:
 		pause_menu()
 	
 	if show_controls:
@@ -354,6 +354,9 @@ func _on_quit_pressed():
 
 func _on_restart_pressed():
 	Global.reset_stats()
+	Global.lock = true
+	Global.castle_defeated = false
+	Global.void_defeated = false
 	get_tree().change_scene_to_file("res://scenes/world.tscn")
 
 func _on_controls_toggle_pressed():
