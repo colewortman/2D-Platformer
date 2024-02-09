@@ -39,6 +39,7 @@ func _ready():
 	healthbar.init_health($HealthComponent.health)
 
 func _process(delta):
+	
 	if state == states.DEATH and key_enemy == true:
 		Global.void_defeated = true
 	

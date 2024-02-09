@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://c7ifvkqe4enm0"]
+[gd_scene load_steps=8 format=3 uid="uid://c7ifvkqe4enm0"]
 
 [ext_resource type="Script" path="res://scripts/death_void.gd" id="1_dlnos"]
 [ext_resource type="PackedScene" uid="uid://bfwn2y7kbir1d" path="res://scenes/player.tscn" id="3_csla4"]
@@ -7,9 +7,55 @@
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_21epd"]
 b = Vector2(871, -1)
 
+[sub_resource type="Animation" id="Animation_hdd21"]
+resource_name = "fade_out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../ColorRect2:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_nodoc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../ColorRect2:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x1yeh"]
+_data = {
+"RESET": SubResource("Animation_nodoc"),
+"fade_out": SubResource("Animation_hdd21")
+}
+
 [node name="Death_void" type="Node2D" node_paths=PackedStringArray("player")]
 script = ExtResource("1_dlnos")
 player = NodePath("Player")
+
+[node name="Player" parent="." node_paths=PackedStringArray("summon_base") instance=ExtResource("3_csla4")]
+position = Vector2(-89, 74)
+summon_base = NodePath("../object_node")
+
+[node name="void_wrym" parent="." node_paths=PackedStringArray("player", "loot_base") instance=ExtResource("3_yw4s5")]
+position = Vector2(417, 126)
+player = NodePath("../Player")
+loot_base = NodePath("../object_node")
+key_enemy = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(2, -86)
@@ -26,17 +72,7 @@ color = Color(0, 0, 0, 1)
 position = Vector2(-191, -58)
 shape = SubResource("SegmentShape2D_21epd")
 
-[node name="Player" parent="." node_paths=PackedStringArray("summon_base") instance=ExtResource("3_csla4")]
-position = Vector2(-89, 74)
-summon_base = NodePath("../object_node")
-
 [node name="object_node" type="Node2D" parent="." groups=["objects"]]
-
-[node name="void_wrym" parent="." node_paths=PackedStringArray("player", "loot_base") instance=ExtResource("3_yw4s5")]
-position = Vector2(417, 126)
-player = NodePath("../Player")
-loot_base = NodePath("../object_node")
-key_enemy = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -104,9 +140,35 @@ grow_horizontal = 2
 grow_vertical = 0
 text = "Ready"
 
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = -90.0
+offset_right = 160.0
+offset_bottom = 90.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer"]
+root_node = NodePath("../Control")
+libraries = {
+"": SubResource("AnimationLibrary_x1yeh")
+}
+
 [node name="Timer" type="Timer" parent="."]
 wait_time = 5.0
 one_shot = true
 
+[node name="fade" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="pressed" from="CanvasLayer/Control/ColorRect/Button" to="." method="_on_button_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="fade" to="." method="_on_fade_timeout"]

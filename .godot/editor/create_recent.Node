@@ -1,10 +1,10 @@
 AnimationPlayer
+ColorRect
+Timer
 Label
 CanvasLayer
 Control
 Button
-ColorRect
-Timer
 Container
 CheckButton
 TextureRect
