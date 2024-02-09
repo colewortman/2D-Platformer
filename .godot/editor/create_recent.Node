@@ -1,3 +1,4 @@
+AnimatedSprite2D
 AnimationPlayer
 ColorRect
 Timer
@@ -8,7 +9,6 @@ Button
 Container
 CheckButton
 TextureRect
-AnimatedSprite2D
 ProgressBar
 TextureProgressBar
 Node2D

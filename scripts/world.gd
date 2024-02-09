@@ -9,6 +9,9 @@ func _ready():
 	Global.use_stats(player)
 
 func _process(_delta):
+	if Global.lock == false:
+		$AnimatedSprite2D.visible = false
+	
 	if Global.lock == false and popup_num == 0:
 		popup_num = 1
 		$CanvasLayer/Control/Label.visible = true

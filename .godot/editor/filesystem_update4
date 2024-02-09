@@ -1,10 +1,9 @@
-res://scenes/death_void.tscn
-res://scripts/castle_arena.gd
-res://scripts/world.gd
 res://scenes/world.tscn
+res://scripts/world.gd
 res://scenes/player.tscn
 res://scenes/enemy_guard.tscn
 res://scenes/castle_arena.tscn
+res://scenes/death_void.tscn
 res://scenes/void_wrym.tscn
 res://scenes/void_projectile.tscn
 res://scenes/main_menu.tscn
@@ -12,6 +11,3 @@ res://scenes/colossus_knight.tscn
 res://scenes/arrow.tscn
 res://scenes/healthbar_component.tscn
 res://scenes/death_screen.tscn
-res://scripts/player.gd
-res://scripts/death_void.gd
-res://scripts/void_wrym.gd

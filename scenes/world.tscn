@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://d3v5au0s6q17d"]
+[gd_scene load_steps=36 format=3 uid="uid://d3v5au0s6q17d"]
 
 [ext_resource type="PackedScene" uid="uid://blob7hpwc781b" path="res://scenes/souls.tscn" id="1_ih24m"]
 [ext_resource type="Script" path="res://scripts/world.gd" id="1_j1jme"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://b3nt845bfydi3" path="res://assets/mountainbehind_background1.png" id="6_otax5"]
 [ext_resource type="Texture2D" uid="uid://crek26la2h3if" path="res://assets/mountainfront_background1.png" id="7_5n44f"]
 [ext_resource type="Texture2D" uid="uid://cg40lt0bdaq6m" path="res://assets/level1_tiles.png" id="7_tifdc"]
+[ext_resource type="Texture2D" uid="uid://d2j2lv8sflsrb" path="res://scenes/lock.png" id="11_2py80"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4edej"]
 texture = ExtResource("7_tifdc")
@@ -318,6 +319,21 @@ tracks/2/keys = {
 "values": [Color(0, 0, 0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_oels4"]
+resource_name = "fade_out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_awcal"]
 resource_name = "popup"
 length = 2.0
@@ -346,27 +362,44 @@ tracks/1/keys = {
 "values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_oels4"]
-resource_name = "fade_out"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Control/ColorRect:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mnkvo"]
 _data = {
 "RESET": SubResource("Animation_t4ylp"),
 "fade_out": SubResource("Animation_oels4"),
 "popup": SubResource("Animation_awcal")
 }
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_spkfx"]
+atlas = ExtResource("11_2py80")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ohrw6"]
+atlas = ExtResource("11_2py80")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qrt8r"]
+atlas = ExtResource("11_2py80")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lvcft"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_spkfx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ohrw6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qrt8r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ohrw6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
 
 [node name="World" type="Node2D" node_paths=PackedStringArray("player")]
 script = ExtResource("1_j1jme")
@@ -531,7 +564,7 @@ libraries = {
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="outer_bound_check" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(473, 143)
+position = Vector2(472, 141)
 shape = SubResource("CircleShape2D_37aye")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -589,6 +622,22 @@ color = Color(0, 0, 0, 0)
 
 [node name="fade" type="Timer" parent="."]
 one_shot = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(472, 141)
+sprite_frames = SubResource("SpriteFrames_lvcft")
+autoplay = "default"
+frame_progress = 0.981077
+metadata/_aseprite_wizard_config_ = {
+"layer": "",
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"op_exp": false,
+"source": "res://assets/lock.aseprite"
+}
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="fade" to="." method="_on_fade_timeout"]
