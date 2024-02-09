@@ -4,7 +4,6 @@ extends Node2D
 @onready var collision_polygon_2d = $StaticBody2D/CollisionPolygon2D
 @onready var polygon_2d = $StaticBody2D/CollisionPolygon2D/Polygon2D
 
-
 func _ready():
 	Global.external_pause = true
 	Engine.time_scale = 0
@@ -15,22 +14,23 @@ func _ready():
 func _process(_delta):
 	if player.dead:
 		player.boss_bar.visible = false
-		Global.lock = true
-		Global.reset_stats()
-		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+		get_tree().change_scene_to_file("res://scenes/death_screen.tscn")
 	
 	if Input.is_action_just_pressed("escape"):
 		$CanvasLayer/Control.visible = false
 		Engine.time_scale = 1
 		Global.external_pause = false
 	
-	if Global.void_defeated:
+	if Global.void_defeated and $Timer.is_stopped():
 		player.boss_bar.visible = false
-		Global.update_player_stats(player)
-		get_tree().change_scene_to_file("res://scenes/world.tscn")
-
+		$Timer.start()
 
 func _on_button_pressed():
 	$CanvasLayer/Control.visible = false
 	Engine.time_scale = 1
 	Global.external_pause = false
+
+
+func _on_timer_timeout():
+	Global.update_player_stats(player)
+	get_tree().change_scene_to_file("res://scenes/world.tscn")

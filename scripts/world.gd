@@ -1,12 +1,17 @@
 extends Node2D
 
 @export var player : CharacterBody2D
+var popup_num = 0
 
 func _ready():
 	Engine.time_scale = 1
 	Global.use_stats(player)
 
 func _process(_delta):
+	if Global.lock == false and popup_num == 0:
+		popup_num = 1
+		$CanvasLayer/Control.visible = true
+		$CanvasLayer/Control/popup_anim.play("popup")
 	
 	if player.dead and Global.void_defeated == false:
 		Global.reset_stats()

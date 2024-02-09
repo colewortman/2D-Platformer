@@ -152,16 +152,17 @@ func _on_attack_range_body_exited(body):
 		attack_range = false
 		
 func _on_shoot_timer_timeout():
-	var new_projectile = void_projectile.instantiate()
-	new_projectile.summoner = $"."
-	new_projectile.player = player
-	if spawnpoint_right:
-		new_projectile.global_position = $projectile_spawn_right.global_position
-	else:
-		new_projectile.global_position = $projectile_spawn_left.global_position
-	loot_base.add_child(new_projectile) 
-	state = states.IDLE
-	$shoot_cooldown.start()
+	if not state == states.DEATH:
+		var new_projectile = void_projectile.instantiate()
+		new_projectile.summoner = $"."
+		new_projectile.player = player
+		if spawnpoint_right:
+			new_projectile.global_position = $projectile_spawn_right.global_position
+		else:
+			new_projectile.global_position = $projectile_spawn_left.global_position
+		loot_base.add_child(new_projectile) 
+		state = states.IDLE
+		$shoot_cooldown.start()
 
 func _on_shoot_cooldown_timeout():
 	attack_ip = false

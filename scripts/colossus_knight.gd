@@ -159,16 +159,18 @@ func _on_flip_timer_timeout():
 		anim.flip_h = true
 
 func _on_bash_timer_timeout():
-	state = states.IDLE
-	$Shield/shield_hitbox.disabled = true
-	anim.play("idle")
-	$attack_cooldown.start()
+	if not state == states.DEATH:
+		state = states.IDLE
+		$Shield/shield_hitbox.disabled = true
+		anim.play("idle")
+		$attack_cooldown.start()
 
 func _on_slam_timer_timeout():
-	anim.play("idle")
-	$Shield/shield_hitbox.disabled = true
-	$attack_cooldown.start()
-	state = states.IDLE
+	if not state == states.DEATH:
+		anim.play("idle")
+		$Shield/shield_hitbox.disabled = true
+		$attack_cooldown.start()
+		state = states.IDLE
 
 func _on_attack_cooldown_timeout():
 	attack_ip = false
