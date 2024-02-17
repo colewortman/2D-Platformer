@@ -10,6 +10,10 @@ var souls
 var show_player_controls = true
 var external_pause = false
 
+var resolution_setting = 0
+var window_setting = 0
+var volume = 100
+
 func _ready():
 	if health == null and souls == null:
 		reset_stats()

@@ -1,5 +1,6 @@
+res://scripts/options_menu.gd
+res://scenes/options_menu.tscn
 res://scenes/world.tscn
-res://scripts/world.gd
 res://scenes/player.tscn
 res://scenes/enemy_guard.tscn
 res://scenes/castle_arena.tscn
@@ -11,3 +12,7 @@ res://scenes/colossus_knight.tscn
 res://scenes/arrow.tscn
 res://scenes/healthbar_component.tscn
 res://scenes/death_screen.tscn
+res://scripts/Global.gd
+res://scripts/main_menu.gd
+res://scripts/player.gd
+res://scripts/colossus_knight.gd

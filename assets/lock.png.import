@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://0ydjbua28yl5"
-path="res://.godot/imported/void_wyrm.png-0960efc9e50996ddcdcc85bdca98e0af.ctex"
+uid="uid://d2j2lv8sflsrb"
+path="res://.godot/imported/lock.png-962ebed8d2713bfc3a87b85adb53c15d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://void_wyrm.png"
-dest_files=["res://.godot/imported/void_wyrm.png-0960efc9e50996ddcdcc85bdca98e0af.ctex"]
+source_file="res://assets/lock.png"
+dest_files=["res://.godot/imported/lock.png-962ebed8d2713bfc3a87b85adb53c15d.ctex"]
 
 [params]
 

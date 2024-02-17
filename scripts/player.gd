@@ -8,7 +8,6 @@ const FRICTION = 1000.0
 const JUMP_VELOCITY = -300.0
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var paused = false
-@onready var show_controls = Global.show_player_controls
 
 #animation variables
 @onready var anim = $rogue_anim
@@ -44,12 +43,10 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("escape") and Global.external_pause == false:
 		pause_menu()
 	
-	if show_controls:
+	if Global.show_player_controls:
 		$GUI_layer/GUI_node/controls_ui.visible = true
-		$GUI_layer/Menu/controls_toggle.button_pressed = true
 	else:
 		$GUI_layer/GUI_node/controls_ui.visible = false
-		$GUI_layer/Menu/controls_toggle.button_pressed = false
 	
 	if not paused:
 		apply_gravity(delta)
@@ -359,6 +356,5 @@ func _on_restart_pressed():
 	Global.void_defeated = false
 	get_tree().change_scene_to_file("res://scenes/world.tscn")
 
-func _on_controls_toggle_pressed():
-	show_controls = !show_controls
-	Global.show_player_controls = show_controls
+func _on_options_pressed():
+	$GUI_layer/options_menu.visible = true

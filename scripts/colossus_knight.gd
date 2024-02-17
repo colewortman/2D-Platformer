@@ -120,6 +120,7 @@ func _on_detection_area_body_exited(body):
 	
 func _on_health_component_death():
 	state = states.DEATH
+	$Shield/shield_hitbox.disabled = true
 	if $Death_timer.is_stopped():
 		anim.play("death")
 		$Death_timer.start()

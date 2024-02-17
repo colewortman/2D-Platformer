@@ -13,3 +13,6 @@ func _on_start_btn_pressed():
 
 func _on_exit_btn_pressed():
 	get_tree().quit()
+
+func _on_options_btn_pressed():
+	$options_menu.visible = true

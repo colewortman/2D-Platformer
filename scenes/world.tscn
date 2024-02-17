@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://b3nt845bfydi3" path="res://assets/mountainbehind_background1.png" id="6_otax5"]
 [ext_resource type="Texture2D" uid="uid://crek26la2h3if" path="res://assets/mountainfront_background1.png" id="7_5n44f"]
 [ext_resource type="Texture2D" uid="uid://cg40lt0bdaq6m" path="res://assets/level1_tiles.png" id="7_tifdc"]
-[ext_resource type="Texture2D" uid="uid://d2j2lv8sflsrb" path="res://scenes/lock.png" id="11_2py80"]
+[ext_resource type="Texture2D" uid="uid://d2j2lv8sflsrb" path="res://assets/lock.png" id="11_lvnl3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4edej"]
 texture = ExtResource("7_tifdc")
@@ -370,15 +370,15 @@ _data = {
 }
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_spkfx"]
-atlas = ExtResource("11_2py80")
+atlas = ExtResource("11_lvnl3")
 region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ohrw6"]
-atlas = ExtResource("11_2py80")
+atlas = ExtResource("11_lvnl3")
 region = Rect2(64, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qrt8r"]
-atlas = ExtResource("11_2py80")
+atlas = ExtResource("11_lvnl3")
 region = Rect2(0, 64, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_lvcft"]

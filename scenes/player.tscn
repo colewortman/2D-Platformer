@@ -1,4 +1,4 @@
-[gd_scene load_steps=125 format=3 uid="uid://bfwn2y7kbir1d"]
+[gd_scene load_steps=126 format=3 uid="uid://bfwn2y7kbir1d"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_ikava"]
 [ext_resource type="PackedScene" uid="uid://b8m205aiult4w" path="res://scenes/trail.tscn" id="2_v8b08"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://b5kc4mwocw1pq" path="res://assets/hurt.png" id="8_0h1tu"]
 [ext_resource type="Texture2D" uid="uid://bmxabpfh32ia0" path="res://assets/soul.png" id="9_06j3r"]
 [ext_resource type="Texture2D" uid="uid://b0jn84d6y61m8" path="res://assets/controls.png" id="10_gy5i1"]
+[ext_resource type="PackedScene" uid="uid://cc7uqhpeio58l" path="res://scenes/options_menu.tscn" id="11_w53yt"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3w1qv"]
 atlas = ExtResource("2_w2iau")
@@ -1368,37 +1369,18 @@ text = "Game Paused"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label2" type="Label" parent="GUI_layer/Menu"]
+[node name="options" type="Button" parent="GUI_layer/Menu"]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 5
 anchor_left = 0.5
-anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -5.0
-offset_top = -40.0
-offset_right = 36.0
-offset_bottom = -17.0
+offset_left = -26.0
+offset_top = -12.0
+offset_right = 26.0
+offset_bottom = 8.0
 grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 10
-text = "Tool tips"
-vertical_alignment = 1
-
-[node name="controls_toggle" type="CheckButton" parent="GUI_layer/Menu"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -50.0
-offset_top = -40.0
-offset_right = -6.0
-offset_bottom = -16.0
-grow_horizontal = 2
-grow_vertical = 2
-button_pressed = true
+theme_override_font_sizes/font_size = 8
+text = "Options"
 
 [node name="restart" type="Button" parent="GUI_layer/Menu"]
 layout_mode = 1
@@ -1407,13 +1389,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -31.5
-offset_top = -15.0
-offset_right = 31.5
-offset_bottom = 7.0
+offset_left = -26.0
+offset_top = -10.0
+offset_right = 26.0
+offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 10
+theme_override_font_sizes/font_size = 8
 text = "Restart"
 
 [node name="quit" type="Button" parent="GUI_layer/Menu"]
@@ -1423,13 +1405,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -31.5
-offset_top = 10.0
-offset_right = 31.5
+offset_left = -26.0
+offset_top = 12.0
+offset_right = 26.0
 offset_bottom = 32.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 10
+theme_override_font_sizes/font_size = 8
 text = "Main Menu"
 
 [node name="resume" type="Button" parent="GUI_layer/Menu"]
@@ -1439,14 +1421,17 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -31.5
-offset_top = 35.0
-offset_right = 31.5
-offset_bottom = 57.0
+offset_left = -26.0
+offset_top = 34.0
+offset_right = 26.0
+offset_bottom = 54.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 10
+theme_override_font_sizes/font_size = 8
 text = "Resume"
+
+[node name="options_menu" parent="GUI_layer" instance=ExtResource("11_w53yt")]
+visible = false
 
 [connection signal="timeout" from="Transformation_timer" to="." method="_on_transformation_timer_timeout"]
 [connection signal="timeout" from="Attack_timer" to="." method="_on_attack_timer_timeout"]
@@ -1460,7 +1445,7 @@ text = "Resume"
 [connection signal="timeout" from="Dash_timer" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="iFrame_timer" to="." method="_on_i_frame_timer_timeout"]
 [connection signal="timeout" from="Dash_cooldown" to="." method="_on_dash_cooldown_timeout"]
-[connection signal="pressed" from="GUI_layer/Menu/controls_toggle" to="." method="_on_controls_toggle_pressed"]
+[connection signal="pressed" from="GUI_layer/Menu/options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="GUI_layer/Menu/restart" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="GUI_layer/Menu/quit" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="GUI_layer/Menu/resume" to="." method="_on_resume_pressed"]

@@ -1,0 +1,170 @@
+[gd_scene load_steps=3 format=3 uid="uid://cc7uqhpeio58l"]
+
+[ext_resource type="Script" path="res://scripts/options_menu.gd" id="1_7a18x"]
+
+[sub_resource type="Theme" id="Theme_p3c22"]
+PopupMenu/font_sizes/font_separator_size = 5
+PopupMenu/font_sizes/font_size = 10
+
+[node name="options_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_p3c22")
+script = ExtResource("1_7a18x")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 180.0
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -31.0
+offset_right = 31.0
+offset_bottom = 26.0
+grow_horizontal = 2
+text = "Options"
+
+[node name="container" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -140.0
+offset_top = 30.0
+offset_right = 140.0
+offset_bottom = 101.0
+grow_horizontal = 2
+theme_override_constants/separation = 15
+
+[node name="tooltips" type="Label" parent="container"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Tooltips"
+
+[node name="tooltips_button" type="CheckButton" parent="container/tooltips"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -12.0
+offset_right = 4.0
+offset_bottom = 12.0
+grow_horizontal = 0
+grow_vertical = 2
+button_pressed = true
+
+[node name="window" type="Label" parent="container"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 10
+text = "Window:"
+
+[node name="window_button" type="OptionButton" parent="container/window"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 130.0
+offset_top = -10.5
+offset_right = 259.0
+offset_bottom = 9.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 8
+alignment = 1
+item_count = 4
+popup/item_0/text = "Full-Screen"
+popup/item_0/id = 0
+popup/item_1/text = "Window Mode"
+popup/item_1/id = 1
+popup/item_2/text = "Borderless Window"
+popup/item_2/id = 2
+popup/item_3/text = "Borderless Full-Screen"
+popup/item_3/id = 3
+
+[node name="resolution" type="Label" parent="container"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Resolution:"
+
+[node name="resolution_button" type="OptionButton" parent="container/resolution"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -116.0
+offset_top = -10.0
+offset_bottom = 10.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 8
+alignment = 1
+item_count = 6
+popup/item_0/text = "1280 x 1024"
+popup/item_0/id = 0
+popup/item_1/text = "1280 x 720"
+popup/item_1/id = 1
+popup/item_2/text = "1440 x 900"
+popup/item_2/id = 2
+popup/item_3/text = "1366 x 768"
+popup/item_3/id = 3
+popup/item_4/text = "1920 x 1080"
+popup/item_4/id = 4
+popup/item_5/text = "2560 x 1440"
+popup/item_5/id = 5
+
+[node name="volume" type="Label" parent="container"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 10
+text = "Volume:"
+
+[node name="HSlider" type="HSlider" parent="container/volume"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 111.0
+offset_top = -8.5
+offset_right = 240.0
+offset_bottom = 7.5
+grow_horizontal = 0
+grow_vertical = 2
+value = 100.0
+
+[node name="close" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -22.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 10
+text = "close"
+
+[connection signal="pressed" from="container/tooltips/tooltips_button" to="." method="_on_tooltips_button_pressed"]
+[connection signal="item_selected" from="container/window/window_button" to="." method="_on_window_button_item_selected"]
+[connection signal="item_selected" from="container/resolution/resolution_button" to="." method="_on_resolution_button_item_selected"]
+[connection signal="changed" from="container/volume/HSlider" to="." method="_on_h_slider_changed"]
+[connection signal="pressed" from="close" to="." method="_on_close_pressed"]

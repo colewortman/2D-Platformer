@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://d14p7vxpd78qg"]
+[gd_scene load_steps=7 format=3 uid="uid://d14p7vxpd78qg"]
 
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_2s2bc"]
 [ext_resource type="Texture2D" uid="uid://bb137qjxen400" path="res://assets/sky_background1.png" id="2_n0yij"]
+[ext_resource type="PackedScene" uid="uid://cc7uqhpeio58l" path="res://scenes/options_menu.tscn" id="3_pjv7x"]
 
 [sub_resource type="Animation" id="Animation_52c2i"]
 length = 0.001
@@ -101,9 +102,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -22.0
+offset_left = -30.5
 offset_top = -10.0
-offset_right = 22.0
+offset_right = 30.5
 offset_bottom = 15.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -112,19 +113,40 @@ text = "START"
 
 [node name="exit_btn" type="Button" parent="."]
 layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -30.5
+offset_top = -40.0
+offset_right = 30.5
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 12
+text = "EXIT"
+
+[node name="options_btn" type="Button" parent="."]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -22.0
-offset_top = 40.0
-offset_right = 22.0
-offset_bottom = 65.0
+offset_left = -30.5
+offset_top = 20.0
+offset_right = 30.5
+offset_bottom = 45.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 12
-text = "EXIT"
+text = "OPTIONS"
+
+[node name="options_menu" parent="." instance=ExtResource("3_pjv7x")]
+visible = false
+layout_mode = 1
 
 [connection signal="pressed" from="start_btn" to="." method="_on_start_btn_pressed"]
 [connection signal="pressed" from="exit_btn" to="." method="_on_exit_btn_pressed"]
+[connection signal="pressed" from="options_btn" to="." method="_on_options_btn_pressed"]
