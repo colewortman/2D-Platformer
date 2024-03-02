@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://cuvxvfrwsapxn"]
+[gd_scene load_steps=12 format=3 uid="uid://cuvxvfrwsapxn"]
 
 [ext_resource type="Texture2D" uid="uid://ne8oe8xla2k1" path="res://assets/lightning.png" id="1_47uhe"]
 [ext_resource type="Script" path="res://scripts/lightning.gd" id="1_ckvwg"]
+[ext_resource type="AudioStream" uid="uid://vjqcp0hjeljl" path="res://assets/audio/lightning.wav" id="3_75m57"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cyyjn"]
 atlas = ExtResource("1_47uhe")
@@ -91,6 +92,10 @@ one_shot = true
 
 [node name="Anim_cooldown" type="Timer" parent="."]
 wait_time = 0.5
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_75m57")
+volume_db = -5.0
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="timeout" from="Attack_cooldown" to="." method="_on_attack_cooldown_timeout"]

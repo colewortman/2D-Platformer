@@ -99,6 +99,7 @@ func spawn_lightning():
 
 
 func _on_hitbox_component_hit():
+	$AudioStreamPlayer.play()
 	if !state == states.DEATH:
 		$AnimatedSprite2D/ColorRect.visible = true
 		$hurt.play("hurt")

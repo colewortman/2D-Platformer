@@ -1,8 +1,10 @@
-[gd_scene load_steps=21 format=3 uid="uid://uoae7djj7m8y"]
+[gd_scene load_steps=23 format=3 uid="uid://uoae7djj7m8y"]
 
 [ext_resource type="Script" path="res://scripts/void_bomb.gd" id="1_ut8ab"]
 [ext_resource type="Texture2D" uid="uid://cuy857pkk4noa" path="res://assets/void_grenade.png" id="2_lmycr"]
 [ext_resource type="Script" path="res://scripts/HitboxComponent.gd" id="3_7ak6m"]
+[ext_resource type="AudioStream" uid="uid://vew42k23j7gl" path="res://assets/audio/void_ball.wav" id="4_r3mwj"]
+[ext_resource type="AudioStream" uid="uid://bsm1801lc5i14" path="res://assets/audio/void_explosion.wav" id="5_oa1g8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_aoshy"]
 atlas = ExtResource("2_lmycr")
@@ -175,6 +177,14 @@ one_shot = true
 [node name="Explosion_duration" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
+
+[node name="throw_snd" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_r3mwj")
+autoplay = true
+
+[node name="explode_snd" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_oa1g8")
+volume_db = -5.0
 
 [connection signal="area_entered" from="HitboxComponent" to="." method="_on_hitbox_component_area_entered"]
 [connection signal="timeout" from="Spawn_timer" to="." method="_on_spawn_timer_timeout"]

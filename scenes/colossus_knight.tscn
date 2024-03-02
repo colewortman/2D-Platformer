@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://cctkoql7wvni0"]
+[gd_scene load_steps=43 format=3 uid="uid://cctkoql7wvni0"]
 
 [ext_resource type="Script" path="res://scripts/colossus_knight.gd" id="1_h00j2"]
 [ext_resource type="Texture2D" uid="uid://b8xg3drfufrx8" path="res://assets/enemy_colossus_knight.png" id="2_6lp2w"]
@@ -6,6 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://b05t7qod7tx3" path="res://scenes/hitbox_component.tscn" id="4_0xlcu"]
 [ext_resource type="PackedScene" uid="uid://x82pl1gdhc0g" path="res://scenes/popup_component.tscn" id="5_x7jom"]
 [ext_resource type="PackedScene" uid="uid://jy4d2cdbie5j" path="res://scenes/floating_numbers.tscn" id="6_dhwd4"]
+[ext_resource type="AudioStream" uid="uid://c840ffwohu0po" path="res://assets/audio/shield_rush.wav" id="7_rb1yy"]
+[ext_resource type="AudioStream" uid="uid://b6fqlsxbs413b" path="res://assets/audio/shield_hit.wav" id="8_1dc6x"]
+[ext_resource type="AudioStream" uid="uid://b1wtudle38dty" path="res://assets/audio/shield_slam.wav" id="9_bhccc"]
+[ext_resource type="AudioStream" uid="uid://cghrrj5f4tvj5" path="res://assets/audio/shield_bash.wav" id="10_5rfdi"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6atxl"]
 atlas = ExtResource("2_6lp2w")
@@ -382,6 +386,22 @@ position = Vector2(23, 0.499998)
 shape = SubResource("RectangleShape2D_2gbys")
 disabled = true
 
+[node name="snd_timer" type="Timer" parent="."]
+wait_time = 0.55
+
+[node name="charge_snd" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_rb1yy")
+
+[node name="hit_snd" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_1dc6x")
+volume_db = -4.0
+
+[node name="slam_snd" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_bhccc")
+
+[node name="bash_snd" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_5rfdi")
+
 [connection signal="death" from="HealthComponent" to="." method="_on_health_component_death"]
 [connection signal="hit" from="HitboxComponent2" to="." method="_on_hitbox_component_2_hit"]
 [connection signal="hit" from="HitboxComponent" to="." method="_on_hitbox_component_hit"]
@@ -394,3 +414,5 @@ disabled = true
 [connection signal="timeout" from="attack_cooldown" to="." method="_on_attack_cooldown_timeout"]
 [connection signal="timeout" from="Hurt_timer" to="." method="_on_hurt_timer_timeout"]
 [connection signal="timeout" from="Death_timer" to="." method="_on_death_timer_timeout"]
+[connection signal="timeout" from="snd_timer" to="." method="_on_snd_timer_timeout"]
+[connection signal="finished" from="charge_snd" to="." method="_on_charge_snd_finished"]

@@ -74,17 +74,23 @@ func handle_states():
 			attack_damage = 10.0
 			speed = 80.0
 			anim.play("charge1")
+			if $snd_timer.is_stopped():
+				$snd_timer.start()
 			if player_far == false:
 				state = states.BASH
 		states.BASH:
 			attack_damage = 50.0
 			speed = 25.0
 			anim.play("bash1")
+			if not $bash_snd.is_playing():
+				$bash_snd.play()
 		states.SLAM:
 			attack_damage = 100.0
 			speed = 0.0
 			
 			anim.play("slam1")
+			if not $slam_snd.is_playing():
+				$slam_snd.play()
 
 func handle_flipping():
 	
@@ -134,6 +140,7 @@ func _on_death_timer_timeout():
 	queue_free()
 
 func _on_hitbox_component_hit():
+	$hit_snd.play()
 	healthbar.set_health($HealthComponent.health)
 	if !state == states.DEATH:
 		$AnimatedSprite2D/ColorRect.visible = true
@@ -177,6 +184,7 @@ func _on_attack_cooldown_timeout():
 	attack_ip = false
 
 func _on_hitbox_component_2_hit():
+	$hit_snd.play()
 	healthbar.set_health($HealthComponent.health)
 	if !state == states.DEATH:
 		$AnimatedSprite2D/ColorRect.visible = true
@@ -184,4 +192,8 @@ func _on_hitbox_component_2_hit():
 		$Hurt_timer.start()
 		$HealthComponent.crit_zone = true
 
-
+func _on_snd_timer_timeout():
+	if state == states.CHARGE:
+		$charge_snd.play()
+	else:
+		$snd_timer.stop()

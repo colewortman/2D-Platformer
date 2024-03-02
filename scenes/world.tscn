@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://d3v5au0s6q17d"]
+[gd_scene load_steps=37 format=3 uid="uid://d3v5au0s6q17d"]
 
 [ext_resource type="PackedScene" uid="uid://blob7hpwc781b" path="res://scenes/souls.tscn" id="1_ih24m"]
 [ext_resource type="Script" path="res://scripts/world.gd" id="1_j1jme"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://crek26la2h3if" path="res://assets/mountainfront_background1.png" id="7_5n44f"]
 [ext_resource type="Texture2D" uid="uid://cg40lt0bdaq6m" path="res://assets/level1_tiles.png" id="7_tifdc"]
 [ext_resource type="Texture2D" uid="uid://d2j2lv8sflsrb" path="res://assets/lock.png" id="11_lvnl3"]
+[ext_resource type="AudioStream" uid="uid://bakygeh6komai" path="res://assets/audio/unlock.wav" id="12_j7q17"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4edej"]
 texture = ExtResource("7_tifdc")
@@ -639,5 +640,14 @@ metadata/_aseprite_wizard_config_ = {
 "source": "res://assets/lock.aseprite"
 }
 
+[node name="lock_snd" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_j7q17")
+volume_db = 5.0
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="fade" to="." method="_on_fade_timeout"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

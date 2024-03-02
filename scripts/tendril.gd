@@ -52,6 +52,7 @@ func handle_physics(delta):
 func tendril_attack():
 	$attack_control/Area2D/CollisionShape2D.disabled = false
 	anim.play("attack_slam1")
+	$AudioStreamPlayer.play()
 	$Attack_timer.start()
 
 

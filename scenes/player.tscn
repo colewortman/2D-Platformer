@@ -1,4 +1,4 @@
-[gd_scene load_steps=126 format=3 uid="uid://bfwn2y7kbir1d"]
+[gd_scene load_steps=132 format=3 uid="uid://bfwn2y7kbir1d"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_ikava"]
 [ext_resource type="PackedScene" uid="uid://b8m205aiult4w" path="res://scenes/trail.tscn" id="2_v8b08"]
@@ -11,6 +11,12 @@
 [ext_resource type="Texture2D" uid="uid://bmxabpfh32ia0" path="res://assets/soul.png" id="9_06j3r"]
 [ext_resource type="Texture2D" uid="uid://b0jn84d6y61m8" path="res://assets/controls.png" id="10_gy5i1"]
 [ext_resource type="PackedScene" uid="uid://cc7uqhpeio58l" path="res://scenes/options_menu.tscn" id="11_w53yt"]
+[ext_resource type="AudioStream" uid="uid://qqahlkmeuutx" path="res://assets/audio/dagger.wav" id="12_ev71c"]
+[ext_resource type="AudioStream" uid="uid://bkgly7q7aisqc" path="res://assets/audio/monster.wav" id="13_q5e2m"]
+[ext_resource type="AudioStream" uid="uid://c0sxppgf0lopu" path="res://assets/audio/bow.wav" id="14_thdyo"]
+[ext_resource type="AudioStream" uid="uid://cwtpwaow23hl4" path="res://assets/audio/transform.wav" id="15_un6eb"]
+[ext_resource type="AudioStream" uid="uid://6s1i608j8kwd" path="res://assets/audio/tendril.wav" id="16_uvkeq"]
+[ext_resource type="AudioStream" uid="uid://spy8uc5urep8" path="res://assets/audio/dash.wav" id="17_48f63"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3w1qv"]
 atlas = ExtResource("2_w2iau")
@@ -1041,7 +1047,7 @@ width = 20.0
 clip_children = 2
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_70tum")
-animation = &"idle"
+animation = &"attack_bow"
 metadata/_aseprite_wizard_config_ = {
 "layer": "",
 "o_ex_p": "",
@@ -1064,7 +1070,7 @@ visible = false
 clip_children = 2
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_nbrnp")
-animation = &"jump"
+animation = &"transform2"
 metadata/_aseprite_wizard_config_ = {
 "layer": "",
 "o_ex_p": "",
@@ -1432,6 +1438,25 @@ text = "Resume"
 
 [node name="options_menu" parent="GUI_layer" instance=ExtResource("11_w53yt")]
 visible = false
+
+[node name="rogue_snd" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_ev71c")
+
+[node name="monster_snd" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_q5e2m")
+
+[node name="arrow_snd" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_thdyo")
+
+[node name="transform_snd" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_un6eb")
+
+[node name="tendril_snd" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("16_uvkeq")
+
+[node name="dash_snd" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("17_48f63")
+volume_db = -6.0
 
 [connection signal="timeout" from="Transformation_timer" to="." method="_on_transformation_timer_timeout"]
 [connection signal="timeout" from="Attack_timer" to="." method="_on_attack_timer_timeout"]

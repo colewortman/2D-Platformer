@@ -1,6 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://blob7hpwc781b"]
 
 [ext_resource type="Script" path="res://scripts/souls.gd" id="1_cmqbb"]
+[ext_resource type="AudioStream" uid="uid://buuan1k2816qf" path="res://assets/audio/souls.wav" id="2_1m6i3"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_3t5sf"]
 load_path = "res://.godot/imported/xp.png-f552889b7a54b2e4cbf77e7f21efbf49.ctex"
@@ -36,8 +37,6 @@ animations = [{
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ok0kq"]
 
-[sub_resource type="AudioStream" id="AudioStream_bbrsw"]
-
 [node name="souls" type="Area2D" groups=["loot"]]
 top_level = true
 collision_layer = 8
@@ -62,6 +61,6 @@ position = Vector2(0, 6)
 shape = SubResource("CircleShape2D_ok0kq")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = SubResource("AudioStream_bbrsw")
+stream = ExtResource("2_1m6i3")
 
 [connection signal="finished" from="AudioStreamPlayer" to="." method="_on_audio_stream_player_finished"]

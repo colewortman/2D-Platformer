@@ -12,6 +12,7 @@ func _ready():
 	anim.play("spawn")
 	$spawn_timer.start()
 	$duration_timer.start()
+	$AudioStreamPlayer.play()
 
 func _process(_delta):
 	global_position += speed*(player.global_position - global_position).normalized()

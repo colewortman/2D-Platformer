@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://bteed0gfmr55m"]
+[gd_scene load_steps=29 format=3 uid="uid://bteed0gfmr55m"]
 
 [ext_resource type="Script" path="res://scripts/Enemy_mage.gd" id="1_wr1q6"]
 [ext_resource type="Texture2D" uid="uid://cetj3i6mwwyqe" path="res://assets/enemy_mage1.png" id="2_np1on"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b05t7qod7tx3" path="res://scenes/hitbox_component.tscn" id="4_pyi7i"]
 [ext_resource type="PackedScene" uid="uid://x82pl1gdhc0g" path="res://scenes/popup_component.tscn" id="5_8h6xt"]
 [ext_resource type="PackedScene" uid="uid://jy4d2cdbie5j" path="res://scenes/floating_numbers.tscn" id="6_7ln83"]
+[ext_resource type="AudioStream" uid="uid://djt7csipy101u" path="res://assets/audio/mage_hit.wav" id="7_wlhs8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vsa24"]
 atlas = ExtResource("2_np1on")
@@ -250,6 +251,9 @@ one_shot = true
 
 [node name="Death_timer" type="Timer" parent="."]
 one_shot = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_wlhs8")
 
 [connection signal="death" from="HealthComponent" to="." method="_on_health_component_death"]
 [connection signal="hit" from="HitboxComponent" to="." method="_on_hitbox_component_hit"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://ddt6rtpck1koy"]
+[gd_scene load_steps=31 format=3 uid="uid://ddt6rtpck1koy"]
 
 [ext_resource type="Script" path="res://scripts/enemy_guard.gd" id="1_2c2qo"]
 [ext_resource type="PackedScene" uid="uid://cw0dyuimranom" path="res://scenes/health_component.tscn" id="1_jydmx"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b05t7qod7tx3" path="res://scenes/hitbox_component.tscn" id="2_o4sp1"]
 [ext_resource type="PackedScene" uid="uid://x82pl1gdhc0g" path="res://scenes/popup_component.tscn" id="5_dh6xn"]
 [ext_resource type="PackedScene" uid="uid://jy4d2cdbie5j" path="res://scenes/floating_numbers.tscn" id="6_vcpie"]
+[ext_resource type="AudioStream" uid="uid://b6fqlsxbs413b" path="res://assets/audio/shield_hit.wav" id="7_by2lp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1xpw2"]
 atlas = ExtResource("2_3ovo4")
@@ -278,6 +279,10 @@ wait_time = 0.3
 visible = false
 position = Vector2(0, 4)
 shape = SubResource("RectangleShape2D_e881j")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_by2lp")
+volume_db = -4.0
 
 [connection signal="death" from="HealthComponent" to="." method="_on_health_component_death"]
 [connection signal="area_entered" from="HitboxComponent" to="." method="_on_hitbox_component_area_entered"]

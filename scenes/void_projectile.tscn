@@ -1,7 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://cpulme8ybm4li"]
+[gd_scene load_steps=15 format=3 uid="uid://cpulme8ybm4li"]
 
 [ext_resource type="Script" path="res://scripts/void_projectile.gd" id="1_4pei1"]
 [ext_resource type="Texture2D" uid="uid://d015t6vq2ehlm" path="res://assets/void_projectile.png" id="2_5ox2n"]
+[ext_resource type="AudioStream" uid="uid://vew42k23j7gl" path="res://assets/audio/void_ball.wav" id="3_cfkgq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ksaxk"]
 atlas = ExtResource("2_5ox2n")
@@ -120,6 +121,9 @@ one_shot = true
 [node name="duration_timer" type="Timer" parent="."]
 wait_time = 6.0
 one_shot = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_cfkgq")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="timeout" from="hit_timer" to="." method="_on_hit_timer_timeout"]

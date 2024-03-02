@@ -41,6 +41,7 @@ func _on_spawn_timer_timeout():
 
 func _on_fuse_timer_timeout():
 	anim.play("explode")
+	$explode_snd.play()
 	$Collision_delay.start()
 	$Explosion_duration.start()
 	
@@ -49,7 +50,8 @@ func _on_collision_delay_timeout():
 
 func _on_explosion_duration_timeout():
 	$AnimatedSprite2D.visible = false
-	queue_free()
+	if not $explode_snd.is_playing():
+		queue_free()
 
 func _on_hitbox_component_area_entered(area):
 	if area.has_method("damage") and area.get_parent().is_in_group("enemy"):

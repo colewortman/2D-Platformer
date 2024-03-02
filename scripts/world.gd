@@ -16,6 +16,7 @@ func _process(_delta):
 		popup_num = 1
 		$CanvasLayer/Control/Label.visible = true
 		$CanvasLayer/Control/popup_anim.play("popup")
+		$Timer.start()
 	
 	if player.dead and Global.void_defeated == false and $fade.is_stopped():
 		$CanvasLayer/Control/ColorRect.visible = true
@@ -33,8 +34,9 @@ func _on_area_2d_body_entered(body: CharacterBody2D):
 	if body == player and Global.lock == false:
 		Global.update_player_stats(player)
 		get_tree().change_scene_to_file("res://scenes/castle_arena.tscn")
-		
-
 
 func _on_fade_timeout():
 	get_tree().change_scene_to_file(location)
+
+func _on_timer_timeout():
+	$lock_snd.play()

@@ -119,11 +119,13 @@ func handle_transform():
 			anim = $monster_anim
 			anim.visible = true
 			anim.play("transform2")
+			$transform_snd.play()
 			$Transformation_timer.start()
 	#switch back to rogue
 	elif anim == $monster_anim and transform_allow == true and attack_ip == false:
 			transform_allow = false
 			anim.play("transform2_reverse")
+			$transform_snd.play()
 			$Transformation_timer.start()
 #end handle_transform()
 
@@ -143,18 +145,21 @@ func handle_attack(tracker):
 		match tracker:
 			0:
 				anim.play("attack_dagger1")
+				$rogue_snd.play()
 				attack_damage = randi_range(10, 20)
 				crit_chance = 25
 				tracker +=1
 				return tracker
 			1:
 				anim.play("attack_dagger2")
+				$rogue_snd.play()
 				attack_damage = randi_range(10, 20)
 				crit_chance = 25
 				tracker += 1
 				return tracker
 			2:
 				anim.play("attack_scythe1")
+				$rogue_snd.play()
 				attack_damage = randi_range(20, 40)
 				crit_chance = 95
 				tracker = 0
@@ -162,24 +167,28 @@ func handle_attack(tracker):
 			3:
 				$Attack_timer.start(1)
 				anim.play("attack_bow")
+				$arrow_snd.play()
 				$ArrowDelay_timer.start()
 				return tracker
 	else:
 		match tracker:
 			0:
 				anim.play("attack_slash1")
+				$monster_snd.play()
 				attack_damage = randi_range(20, 30)
 				crit_chance = 40
 				tracker +=1
 				return tracker
 			1:
 				anim.play("attack_slash2")
+				$monster_snd.play()
 				attack_damage = randi_range(20, 30)
 				crit_chance = 40
 				tracker += 1
 				return tracker
 			2:
 				anim.play("attack_axe1")
+				$monster_snd.play()
 				attack_damage = randi_range(45, 60)
 				crit_chance = 80
 				tracker = 0
@@ -189,6 +198,7 @@ func handle_attack(tracker):
 					$Attack_timer.start(1)
 					tendril_active = true
 					anim.play("attack_ground1")
+					$tendril_snd.play()
 					spawn_tendril()
 				else:
 					$Attack_timer.start(0.3)
@@ -236,6 +246,7 @@ func handle_dash():
 			$".".set_collision_mask_value(2, false)
 		$HitboxComponent/hitbox_collision.disabled = true
 		$Trail.visible = true
+		$dash_snd.play()
 		speed = dash_speed
 		acceleration = dash_speed
 		$iFrame_timer.start()

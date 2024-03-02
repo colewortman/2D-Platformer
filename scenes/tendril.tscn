@@ -1,7 +1,8 @@
-[gd_scene load_steps=19 format=3 uid="uid://b3mc8012qls1s"]
+[gd_scene load_steps=20 format=3 uid="uid://b3mc8012qls1s"]
 
 [ext_resource type="Script" path="res://scripts/tendril.gd" id="2_i6o8a"]
 [ext_resource type="Texture2D" uid="uid://e0n1yhcajiyv" path="res://assets/monster_tendril.png" id="2_wy2f3"]
+[ext_resource type="AudioStream" uid="uid://bkgly7q7aisqc" path="res://assets/audio/monster.wav" id="3_1sukv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h7wff"]
 atlas = ExtResource("2_wy2f3")
@@ -190,6 +191,9 @@ shape = SubResource("CapsuleShape2D_bxvc4")
 [node name="Duration" type="Timer" parent="."]
 wait_time = 6.0
 one_shot = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_1sukv")
 
 [connection signal="area_entered" from="attack_control/Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="timeout" from="SpawnDelay_timer" to="." method="_on_spawn_delay_timer_timeout"]

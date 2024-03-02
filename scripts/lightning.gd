@@ -8,6 +8,7 @@ var speed = 200.0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	anim.play("idle")
+	$AudioStreamPlayer.play()
 	$Attack_cooldown.start()
 	
 func _on_attack_cooldown_timeout():
